@@ -261,8 +261,7 @@ const ADAGES_DATA: AdageSeed[] = [
   {
     langueCode: "bam",
     texteOriginal: "Mɔgɔ tɛ ɲɛnajɛ sɔrɔ a yɛrɛ ma",
-    traductionLitterale:
-      "On ne trouve pas le bonheur pour soi-même seul.",
+    traductionLitterale: "On ne trouve pas le bonheur pour soi-même seul.",
     explication:
       "La sagesse Bambara enseigne que le bonheur est collectif. Ce proverbe souligne l'interdépendance humaine et la valeur de la communauté.",
     contexteUsage:
@@ -272,8 +271,7 @@ const ADAGES_DATA: AdageSeed[] = [
   {
     langueCode: "ewe",
     texteOriginal: "Ðevi ma nya nuto ƒe ŋkume o",
-    traductionLitterale:
-      "L'enfant ne connaît pas le visage de la mort.",
+    traductionLitterale: "L'enfant ne connaît pas le visage de la mort.",
     explication:
       "Ce proverbe Éwé exprime l'innocence de l'enfance et la protection que la communauté doit offrir aux plus jeunes face aux réalités dures de la vie.",
     contexteUsage:
@@ -372,7 +370,9 @@ async function main() {
   for (const adage of ADAGES_DATA) {
     const langueId = langueMap.get(adage.langueCode);
     if (!langueId) {
-      console.warn(`  ⚠ Langue "${adage.langueCode}" non trouvée, adage ignoré`);
+      console.warn(
+        `  ⚠ Langue "${adage.langueCode}" non trouvée, adage ignoré`,
+      );
       continue;
     }
 
