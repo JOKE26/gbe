@@ -1,0 +1,196 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ==========================================================================
+   Design System « Parchemin Sacré » — Gbé
+   Palette → shadcn semantic tokens
+   ========================================================================== */
+
+:root {
+  /* ── Palette Gbé ─────────────────────────────────────────── */
+  --color-sable: #f5f0e8;
+  --color-ebene: #1a1a2e;
+  --color-terre: #b5451b;
+  --color-or: #d4a017;
+  --color-indigo: #2d3a8c;
+  --color-baobab: #2e7d32;
+  --color-surface: #fffdf8;
+
+  /* ── shadcn semantic mapping ──────────────────────────────── */
+  --radius: 1rem;
+
+  --background: var(--color-sable);
+  --foreground: var(--color-ebene);
+
+  --card: var(--color-surface);
+  --card-foreground: var(--color-ebene);
+
+  --popover: var(--color-surface);
+  --popover-foreground: var(--color-ebene);
+
+  --primary: var(--color-terre);
+  --primary-foreground: #ffffff;
+
+  --secondary: oklch(from var(--color-or) l c h / 0.08);
+  --secondary-foreground: var(--color-ebene);
+
+  --muted: oklch(from var(--color-ebene) l c h / 0.04);
+  --muted-foreground: oklch(from var(--color-ebene) l c h / 0.5);
+
+  --accent: oklch(from var(--color-indigo) l c h / 0.06);
+  --accent-foreground: var(--color-indigo);
+
+  --destructive: #dc2626;
+
+  --border: oklch(from var(--color-or) l c h / 0.1);
+  --input: oklch(from var(--color-or) l c h / 0.15);
+  --ring: var(--color-terre);
+
+  --chart-1: var(--color-terre);
+  --chart-2: var(--color-or);
+  --chart-3: var(--color-indigo);
+  --chart-4: var(--color-baobab);
+  --chart-5: #8b5cf6;
+
+  --sidebar: var(--color-surface);
+  --sidebar-foreground: var(--color-ebene);
+  --sidebar-primary: var(--color-terre);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: oklch(from var(--color-terre) l c h / 0.06);
+  --sidebar-accent-foreground: var(--color-terre);
+  --sidebar-border: oklch(from var(--color-or) l c h / 0.1);
+  --sidebar-ring: var(--color-terre);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* ── Palette directe Gbé (pour classes utilitaires) ─── */
+  --color-sable: #f5f0e8;
+  --color-ebene: #1a1a2e;
+  --color-terre: #b5451b;
+  --color-or: #d4a017;
+  --color-indigo: #2d3a8c;
+  --color-baobab: #2e7d32;
+  --color-surface: #fffdf8;
+
+  /* ── Fonts ─────────────────────────────────────────────── */
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-lora);
+
+  /* ── shadcn semantic tokens ────────────────────────────── */
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+
+  /* ── Radius (coins doux Parchemin Sacré) ───────────────── */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+}
+
+/* ==========================================================================
+   Sélection de texte — signature Parchemin Sacré
+   ========================================================================== */
+
+::selection {
+  background: oklch(from #d4a017 l c h / 0.3);
+  color: #b5451b;
+}
+
+/* ==========================================================================
+   Scrollbar (Webkit)
+   ========================================================================== */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-sable);
+}
+
+::-webkit-scrollbar-thumb {
+  background: oklch(from #d4a017 l c h / 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(from #d4a017 l c h / 0.5);
+}
+
+/* ==========================================================================
+   Dark mode (réservé pour extension future)
+   ========================================================================== */
+
+.dark {
+  --background: var(--color-ebene);
+  --foreground: #ededed;
+  --card: #1f1f35;
+  --card-foreground: #ededed;
+  --popover: #1f1f35;
+  --popover-foreground: #ededed;
+  --primary: var(--color-terre);
+  --primary-foreground: #ffffff;
+  --secondary: oklch(from var(--color-or) l c h / 0.12);
+  --secondary-foreground: #ededed;
+  --muted: oklch(from #ededed l c h / 0.06);
+  --muted-foreground: oklch(from #ededed l c h / 0.5);
+  --accent: oklch(from var(--color-indigo) l c h / 0.15);
+  --accent-foreground: #93a3f8;
+  --destructive: #ef4444;
+  --border: oklch(from #ededed l c h / 0.1);
+  --input: oklch(from #ededed l c h / 0.15);
+  --ring: var(--color-terre);
+  --sidebar: #1f1f35;
+  --sidebar-foreground: #ededed;
+  --sidebar-primary: var(--color-terre);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: oklch(from var(--color-terre) l c h / 0.1);
+  --sidebar-accent-foreground: #ededed;
+  --sidebar-border: oklch(from #ededed l c h / 0.1);
+  --sidebar-ring: var(--color-terre);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

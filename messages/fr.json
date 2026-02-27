@@ -1,0 +1,190 @@
+{
+  "common": {
+    "appName": "Gbé",
+    "loading": "Chargement…",
+    "error": "Une erreur est survenue",
+    "retry": "Réessayer",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "confirm": "Confirmer",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "search": "Rechercher",
+    "noResults": "Aucun résultat"
+  },
+  "nav": {
+    "home": "Accueil",
+    "profile": "Profil",
+    "contributions": "Contributions",
+    "settings": "Paramètres",
+    "login": "Se connecter",
+    "logout": "Se déconnecter",
+    "register": "S'inscrire"
+  },
+  "landing": {
+    "nav": {
+      "how": "Comment ça marche",
+      "languages": "Langues",
+      "proverbs": "Proverbes",
+      "testimonials": "Témoignages",
+      "cta": "Commencer",
+      "openMenu": "Ouvrir le menu",
+      "closeMenu": "Fermer le menu"
+    },
+    "hero": {
+      "label": "Patrimoine linguistique africain",
+      "title": "La sagesse de vos ancêtres,",
+      "titleAccent": "chaque jour.",
+      "subtitle": "Recevez un adage quotidien dans votre langue africaine d'origine, avec traduction et explication culturelle.",
+      "cta": "Commencer gratuitement",
+      "ctaSecondary": "Découvrir les langues"
+    },
+    "mockup": {
+      "label": "Fon — Bénin",
+      "proverb": "« Gbédoto wɛ nyi agbaza »",
+      "translation": "Le destin est le corps — Ce que nous sommes est notre destinée."
+    },
+    "howItWorks": {
+      "label": "Comment ça marche",
+      "title": "Trois étapes vers la sagesse",
+      "step1": {
+        "title": "Créez votre profil",
+        "description": "Renseignez vos origines : pays, ethnie, langue."
+      },
+      "step2": {
+        "title": "Recevez votre adage",
+        "description": "Chaque jour, un proverbe dans votre langue d'origine."
+      },
+      "step3": {
+        "title": "Explorez et partagez",
+        "description": "Découvrez la signification culturelle et partagez la sagesse."
+      }
+    },
+    "languages": {
+      "label": "Langues disponibles",
+      "title": "Les langues de la sagesse",
+      "subtitle": "Fon, Yoruba, Bambara, Éwé, Wolof et bien d'autres…",
+      "viewAll": "Voir toutes les langues"
+    },
+    "interactive": {
+      "label": "Explorez un proverbe",
+      "title": "La parole a un sens caché",
+      "tabs": {
+        "origin": "Original",
+        "translation": "Traduction",
+        "context": "Contexte"
+      },
+      "content": {
+        "origin": "« Ọ̀rúnmìlà ni baba àwọn Ifá »",
+        "translation": "Orunmila est le père de l'Ifá — La source de la divination et de la sagesse Yoruba.",
+        "context": "Ce proverbe est récité lors des cérémonies Ifá pour invoquer la guidance des ancêtres et honorer la tradition orale Yoruba."
+      }
+    },
+    "testimonials": {
+      "label": "Témoignages",
+      "title": "Ce que dit la communauté"
+    },
+    "cta": {
+      "title": "Reconnectez-vous à vos racines",
+      "subtitle": "Rejoignez Gbé et redécouvrez la richesse de votre patrimoine linguistique.",
+      "button": "Créer mon compte",
+      "secondary": "En savoir plus"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Bon retour",
+      "subtitle": "Connectez-vous pour retrouver votre adage du jour.",
+      "google": "Continuer avec Google",
+      "magicLink": "Recevoir un lien magique",
+      "emailPlaceholder": "votre@email.com"
+    },
+    "register": {
+      "title": "Rejoignez Gbé",
+      "subtitle": "Créez votre compte et commencez votre voyage linguistique."
+    },
+    "verify": {
+      "title": "Vérifiez votre email",
+      "subtitle": "Un lien de connexion a été envoyé à votre adresse email."
+    }
+  },
+  "dashboard": {
+    "accueil": {
+      "title": "Votre adage du jour",
+      "greeting": "Bonjour",
+      "noAdage": "Votre adage du jour sera bientôt disponible.",
+      "markAsRead": "Marquer comme lu"
+    },
+    "profil": {
+      "title": "Mon profil",
+      "subtitle": "Gérez vos informations et vos origines.",
+      "origins": "Mes origines",
+      "addOrigin": "Ajouter une origine",
+      "preferences": "Préférences",
+      "dailyEmail": "Recevoir l'adage par email"
+    },
+    "contributions": {
+      "title": "Contributions",
+      "subtitle": "Proposez des adages et suivez vos soumissions.",
+      "submit": "Soumettre un adage",
+      "mySubmissions": "Mes soumissions",
+      "status": {
+        "pending": "En attente",
+        "approved": "Approuvé",
+        "rejected": "Rejeté"
+      }
+    },
+    "parametres": {
+      "title": "Paramètres",
+      "subtitle": "Gérez vos préférences et notifications."
+    }
+  },
+  "adage": {
+    "original": "Texte original",
+    "translation": "Traduction littérale",
+    "explanation": "Explication culturelle",
+    "context": "Contexte d'usage",
+    "source": "Source",
+    "language": "Langue",
+    "share": "Partager",
+    "listen": "Écouter"
+  },
+  "errors": {
+    "notFound": {
+      "title": "Page introuvable",
+      "description": "La page que vous cherchez n'existe pas.",
+      "backHome": "Retour à l'accueil"
+    },
+    "unauthorized": "Vous devez être connecté pour accéder à cette page.",
+    "generic": "Une erreur inattendue est survenue. Veuillez réessayer."
+  },
+  "footer": {
+    "tagline": "La sagesse africaine, un adage à la fois.",
+    "rights": "Tous droits réservés.",
+    "sections": {
+      "app": {
+        "title": "Application",
+        "daily": "Adage du jour",
+        "profile": "Mon profil",
+        "contribute": "Contribuer"
+      },
+      "community": {
+        "title": "Communauté",
+        "about": "À propos",
+        "blog": "Blog",
+        "contact": "Contact"
+      },
+      "legal": {
+        "title": "Légal",
+        "privacy": "Confidentialité",
+        "terms": "Conditions d'utilisation",
+        "cookies": "Cookies"
+      }
+    },
+    "bottom": {
+      "tagline": "Afrique · Diaspora · Monde"
+    }
+  }
+}
