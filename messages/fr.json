@@ -99,15 +99,25 @@
       "subtitle": "Connectez-vous pour retrouver votre adage du jour.",
       "google": "Continuer avec Google",
       "magicLink": "Recevoir un lien magique",
-      "emailPlaceholder": "votre@email.com"
+      "emailPlaceholder": "votre@email.com",
+      "or": "ou",
+      "noAccount": "Pas encore de compte ?",
+      "signUp": "Créer un compte",
+      "checkEmail": "Vérifiez votre email",
+      "checkEmailSubtitle": "Un lien de connexion a été envoyé. Vérifiez votre boîte de réception.",
+      "retry": "Réessayer"
     },
     "register": {
       "title": "Rejoignez Gbé",
-      "subtitle": "Créez votre compte et commencez votre voyage linguistique."
+      "subtitle": "Créez votre compte et commencez votre voyage linguistique.",
+      "emailSignUp": "S'inscrire par email",
+      "hasAccount": "Déjà un compte ?",
+      "signIn": "Se connecter"
     },
     "verify": {
       "title": "Vérifiez votre email",
-      "subtitle": "Un lien de connexion a été envoyé à votre adresse email."
+      "subtitle": "Un lien de connexion a été envoyé à votre adresse email.",
+      "backToLogin": "Retour à la connexion"
     }
   },
   "dashboard": {

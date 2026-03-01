@@ -4,6 +4,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 import { Toaster } from "@/components/ui/sonner";
 import { QueryProvider } from "@/components/shared/query-provider";
+import { Providers } from "@/components/shared/providers";
 import "./globals.css";
 
 const inter = Inter({
@@ -41,10 +42,12 @@ export default async function RootLayout({
         className={`${inter.variable} ${lora.variable} font-sans antialiased`}
       >
         <NextIntlClientProvider messages={messages}>
-          <QueryProvider>
-            {children}
-            <Toaster />
-          </QueryProvider>
+          <Providers>
+            <QueryProvider>
+              {children}
+              <Toaster />
+            </QueryProvider>
+          </Providers>
         </NextIntlClientProvider>
       </body>
     </html>
