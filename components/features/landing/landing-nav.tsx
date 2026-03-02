@@ -60,7 +60,7 @@ export function LandingNav() {
       </div>
 
       {/* Gradient line */}
-      <div className="h-[1px] bg-gradient-to-r from-terre via-or to-terre" />
+      <div className="h-px bg-linear-to-r from-terre via-or to-terre" />
 
       {/* Mobile menu */}
       <AnimatePresence>

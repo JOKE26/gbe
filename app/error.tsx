@@ -13,7 +13,7 @@ export default function ErrorPage({ error, reset }: ErrorProps) {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-sable px-4">
       <h1 className="font-serif text-4xl font-bold text-terre">Oops</h1>
-      <div className="mt-4 h-[1px] w-12 bg-or" />
+      <div className="mt-4 h-px w-12 bg-or" />
       <p className="mt-4 text-sm text-ebene/50">{t("generic")}</p>
       <button
         onClick={reset}

@@ -1,17 +1,61 @@
-import { useTranslations } from "next-intl";
+import { auth } from "@/lib/auth";
+import { redirect } from "next/navigation";
+import { getTranslations } from "next-intl/server";
+import { getOrCreateDailyAdage } from "@/lib/adage-quotidien";
 import { PageHeader } from "@/components/shared/page-header";
+import { AdageCard } from "@/components/features/adage/adage-card";
+import { BookOpen } from "lucide-react";
+import Link from "next/link";
 
-export default function AccueilPage() {
-  const t = useTranslations("dashboard.accueil");
+export default async function AccueilPage() {
+  const session = await auth();
+  if (!session?.user?.id) redirect("/login");
+
+  const t = await getTranslations("dashboard.accueil");
+
+  const quotidien = await getOrCreateDailyAdage(session.user.id);
+
+  const greeting = session.user.name
+    ? `${t("greeting")}, ${session.user.name}`
+    : t("greeting");
 
   return (
     <div>
-      <PageHeader title={t("title")} />
-      <div className="rounded-2xl border border-or/10 bg-surface p-8 text-center">
-        <p className="font-serif text-lg italic text-ebene/60">
-          {t("noAdage")}
-        </p>
-      </div>
+      <PageHeader title={greeting} description={t("title")} />
+
+      {quotidien ? (
+        <div className="mx-auto max-w-2xl">
+          <AdageCard
+            quotidienId={quotidien.id}
+            texteOriginal={quotidien.adage.texteOriginal}
+            traductionLitterale={quotidien.adage.traductionLitterale}
+            explication={quotidien.adage.explication}
+            contexteUsage={quotidien.adage.contexteUsage}
+            source={quotidien.adage.source}
+            langueNom={quotidien.adage.langue.nom}
+            langueCode={quotidien.adage.langue.code}
+            lu={quotidien.lu}
+          />
+        </div>
+      ) : (
+        <div className="mx-auto max-w-md">
+          <div className="rounded-2xl border border-or/10 bg-surface p-8 text-center">
+            <BookOpen className="mx-auto h-10 w-10 text-or/40" />
+            <p className="mt-4 font-serif text-lg italic text-ebene/50">
+              {t("noAdage")}
+            </p>
+            <p className="mt-2 text-sm text-ebene/40">
+              {t("setupOriginsHint")}
+            </p>
+            <Link
+              href="/profil"
+              className="mt-4 inline-block rounded-full border border-or/20 px-5 py-2 text-xs font-bold uppercase tracking-[0.2em] text-ebene transition-all hover:bg-or/5"
+            >
+              {t("goToProfile")}
+            </Link>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -2,7 +2,6 @@
 
 import { useTranslations } from "next-intl";
 import { signOut } from "next-auth/react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,6 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { UserAvatar } from "@/components/shared/user-avatar";
 import { LogOut, User } from "lucide-react";
 
 interface HeaderProps {
@@ -23,15 +23,6 @@ interface HeaderProps {
 export function Header({ user }: HeaderProps) {
   const t = useTranslations("nav");
 
-  const initials = user.name
-    ? user.name
-        .split(" ")
-        .map((n) => n[0])
-        .join("")
-        .toUpperCase()
-        .slice(0, 2)
-    : user.email[0].toUpperCase();
-
   return (
     <header className="flex h-16 items-center justify-between border-b border-or/10 bg-surface px-4 md:px-8">
       <div className="flex items-center gap-3">
@@ -44,15 +35,7 @@ export function Header({ user }: HeaderProps) {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <button className="flex items-center gap-2 rounded-full p-1 transition-all hover:bg-terre/5">
-            <Avatar className="h-8 w-8">
-              <AvatarImage
-                src={user.image ?? undefined}
-                alt={user.name ?? ""}
-              />
-              <AvatarFallback className="bg-terre text-xs text-white">
-                {initials}
-              </AvatarFallback>
-            </Avatar>
+            <UserAvatar user={user} size="sm" />
             <span className="hidden text-sm text-ebene md:inline">
               {user.name ?? user.email}
             </span>

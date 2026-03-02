@@ -305,6 +305,20 @@ const ADAGES_DATA: AdageSeed[] = [
 async function main() {
   console.log("🌱 Début du seed Gbé...\n");
 
+  // 0. Créer / promouvoir l'administrateur principal
+  console.log("👑 Configuration de l'administrateur...");
+  const admin = await prisma.user.upsert({
+    where: { email: "degboejoachim@gmail.com" },
+    update: { role: "ADMIN" },
+    create: {
+      email: "degboejoachim@gmail.com",
+      name: "Joachim Degboe",
+      role: "ADMIN",
+      emailVerified: new Date(),
+    },
+  });
+  console.log(`  ✓ Admin : ${admin.email} (rôle: ${admin.role})`);
+
   // 1. Créer les pays
   console.log("📍 Création des pays...");
   const paysMap = new Map<string, string>();

@@ -17,7 +17,7 @@ export function Footer() {
             <p className="mt-3 font-serif text-sm italic text-ebene/50">
               {t("tagline")}
             </p>
-            <div className="mt-4 h-[1px] w-12 bg-or" />
+            <div className="mt-4 h-px w-12 bg-or" />
           </div>
 
           {/* Colonne 2 — Application */}

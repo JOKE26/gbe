@@ -12,13 +12,15 @@
     "next": "Suivant",
     "previous": "Précédent",
     "search": "Rechercher",
-    "noResults": "Aucun résultat"
+    "noResults": "Aucun résultat",
+    "toggleTheme": "Basculer le thème"
   },
   "nav": {
     "home": "Accueil",
     "profile": "Profil",
     "contributions": "Contributions",
     "settings": "Paramètres",
+    "admin": "Administration",
     "login": "Se connecter",
     "logout": "Se déconnecter",
     "register": "S'inscrire"
@@ -124,16 +126,35 @@
     "accueil": {
       "title": "Votre adage du jour",
       "greeting": "Bonjour",
-      "noAdage": "Votre adage du jour sera bientôt disponible.",
-      "markAsRead": "Marquer comme lu"
+      "noAdage": "Aucun adage disponible pour le moment.",
+      "setupOriginsHint": "Configurez vos origines pour recevoir un adage dans votre langue.",
+      "goToProfile": "Configurer mon profil",
+      "markAsRead": "Marquer comme lu",
+      "alreadyRead": "Lu"
     },
     "profil": {
       "title": "Mon profil",
       "subtitle": "Gérez vos informations et vos origines.",
       "origins": "Mes origines",
+      "noOrigins": "Vous n'avez pas encore ajouté d'origines.",
       "addOrigin": "Ajouter une origine",
+      "country": "Pays",
+      "ethnicity": "Ethnie",
+      "language": "Langue",
+      "selectCountry": "Choisir un pays",
+      "selectEthnicity": "Choisir une ethnie",
+      "selectLanguage": "Choisir une langue",
+      "confirmAdd": "Ajouter",
+      "cancelAdd": "Annuler",
+      "nameLabel": "Nom complet",
+      "bioLabel": "Bio",
+      "bioPlaceholder": "Quelques mots sur vous…",
+      "preferredLanguage": "Langue préférée pour l'adage",
+      "noPreference": "Pas de préférence",
       "preferences": "Préférences",
-      "dailyEmail": "Recevoir l'adage par email"
+      "dailyEmail": "Recevoir l'adage par email",
+      "saveButton": "Enregistrer",
+      "saveSuccess": "Profil mis à jour avec succès"
     },
     "contributions": {
       "title": "Contributions",
@@ -152,6 +173,7 @@
     }
   },
   "adage": {
+    "new": "Nouveau",
     "original": "Texte original",
     "translation": "Traduction littérale",
     "explanation": "Explication culturelle",
@@ -160,6 +182,46 @@
     "language": "Langue",
     "share": "Partager",
     "listen": "Écouter"
+  },
+  "admin": {
+    "adages": {
+      "title": "Gestion des adages",
+      "subtitle": "Créez, modifiez et modérez les adages de la plateforme.",
+      "empty": "Aucun adage enregistré pour le moment.",
+      "add": "Ajouter un adage",
+      "addTitle": "Nouvel adage",
+      "editTitle": "Modifier l'adage",
+      "edit": "Modifier",
+      "approve": "Approuver",
+      "reject": "Rejeter",
+      "deleteButton": "Supprimer",
+      "cancel": "Annuler",
+      "saving": "Enregistrement…",
+      "saveCreate": "Créer",
+      "saveEdit": "Enregistrer",
+      "columnOriginal": "Texte original",
+      "columnLangue": "Langue",
+      "columnStatut": "Statut",
+      "columnContributeur": "Contributeur",
+      "columnActions": "Actions",
+      "fieldLangue": "Langue",
+      "fieldOriginal": "Texte original",
+      "fieldTraduction": "Traduction littérale",
+      "fieldExplication": "Explication culturelle",
+      "fieldContexte": "Contexte d'usage",
+      "fieldSource": "Source / référence",
+      "selectLangue": "Choisir une langue",
+      "placeholderOriginal": "Ex : « Gbédoto wɛ nyi agbaza »",
+      "placeholderTraduction": "Ex : Le destin est le corps",
+      "placeholderExplication": "Signification culturelle et profonde du proverbe…",
+      "placeholderContexte": "Quand et comment ce proverbe est utilisé…",
+      "placeholderSource": "Ex : Tradition orale Fon, Bénin",
+      "statut": {
+        "pending": "En attente",
+        "approved": "Approuvé",
+        "rejected": "Rejeté"
+      }
+    }
   },
   "errors": {
     "notFound": {

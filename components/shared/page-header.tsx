@@ -26,7 +26,7 @@ export function PageHeader({
         </div>
         {children && <div>{children}</div>}
       </div>
-      <div className="mt-4 h-[1px] w-12 bg-or" />
+      <div className="mt-4 h-px w-12 bg-or" />
     </div>
   );
 }

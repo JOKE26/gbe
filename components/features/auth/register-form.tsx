@@ -70,7 +70,7 @@ export function RegisterForm() {
     <div className="rounded-2xl border border-or/10 bg-surface p-8">
       <h2 className="font-serif text-xl font-bold text-ebene">{t("title")}</h2>
       <p className="mt-1 text-sm text-ebene/50">{t("subtitle")}</p>
-      <div className="mt-4 h-[1px] w-8 bg-or" />
+      <div className="mt-4 h-px w-8 bg-or" />
 
       {/* Google */}
       <div className="mt-6">
@@ -103,9 +103,9 @@ export function RegisterForm() {
 
       {/* Séparateur */}
       <div className="my-6 flex items-center gap-3">
-        <div className="h-[1px] flex-1 bg-or/10" />
+        <div className="h-px flex-1 bg-or/10" />
         <span className="text-xs text-ebene/40">{tLogin("or")}</span>
-        <div className="h-[1px] flex-1 bg-or/10" />
+        <div className="h-px flex-1 bg-or/10" />
       </div>
 
       {/* Magic Link */}

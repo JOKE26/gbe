@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
-import { Home, User, BookOpen, Settings } from "lucide-react";
+import { Home, User, BookOpen, Settings, ShieldCheck } from "lucide-react";
 
 const NAV_ITEMS = [
   { href: "/accueil", icon: Home, labelKey: "home" as const },
@@ -17,12 +17,20 @@ const NAV_ITEMS = [
   { href: "/parametres", icon: Settings, labelKey: "settings" as const },
 ];
 
-export function Sidebar() {
+const ADMIN_ITEMS = [
+  { href: "/admin/adages", icon: ShieldCheck, labelKey: "admin" as const },
+];
+
+interface SidebarProps {
+  isAdmin?: boolean;
+}
+
+export function Sidebar({ isAdmin = false }: SidebarProps) {
   const pathname = usePathname();
   const t = useTranslations("nav");
 
   return (
-    <aside className="hidden w-[264px] flex-shrink-0 border-r border-or/10 bg-surface md:block">
+    <aside className="hidden w-66 shrink-0 border-r border-or/10 bg-surface md:block">
       <div className="flex h-full flex-col">
         {/* Logo */}
         <div className="flex h-16 items-center px-6">
@@ -34,11 +42,11 @@ export function Sidebar() {
           </Link>
         </div>
 
-        <div className="mx-6 h-[1px] bg-or/10" />
+        <div className="mx-6 h-px bg-or/10" />
 
         {/* Navigation */}
         <nav className="flex-1 space-y-1 px-3 py-4">
-          {NAV_ITEMS.map((item) => {
+          {[...NAV_ITEMS, ...(isAdmin ? ADMIN_ITEMS : [])].map((item) => {
             const isActive = pathname.startsWith(item.href);
             return (
               <Link

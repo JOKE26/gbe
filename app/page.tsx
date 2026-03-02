@@ -68,7 +68,7 @@ export default function LandingPage() {
               {t("hero.title")}{" "}
               <span className="text-terre">{t("hero.titleAccent")}</span>
             </h1>
-            <div className="mx-auto mt-4 h-[1px] w-12 bg-or" />
+            <div className="mx-auto mt-4 h-px w-12 bg-or" />
             <p className="mt-6 text-lg text-ebene/60">{t("hero.subtitle")}</p>
 
             {/* CTA buttons */}
@@ -90,11 +90,11 @@ export default function LandingPage() {
 
           {/* Carte mockup adage */}
           <div className="mx-auto mt-12 max-w-md rounded-2xl border border-or/10 bg-surface p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md md:p-8">
-            <div className="h-[2px] w-full rounded-full bg-gradient-to-r from-terre via-or to-terre" />
+            <div className="h-0.5 w-full rounded-full bg-linear-to-r from-terre via-or to-terre" />
             <p className="mt-4 text-xs font-bold uppercase tracking-[0.2em] text-terre">
               {t("mockup.label")}
             </p>
-            <div className="mt-3 h-[1px] w-8 bg-or" />
+            <div className="mt-3 h-px w-8 bg-or" />
             <p className="mt-4 font-serif text-xl italic text-ebene">
               {t("mockup.proverb")}
             </p>
@@ -116,7 +116,7 @@ export default function LandingPage() {
           <h2 className="mt-3 text-center font-serif text-2xl font-bold text-ebene md:text-3xl">
             {t("howItWorks.title")}
           </h2>
-          <div className="mx-auto mt-3 h-[1px] w-12 bg-or" />
+          <div className="mx-auto mt-3 h-px w-12 bg-or" />
 
           <div className="mt-12 grid gap-8 md:grid-cols-3">
             {(["step1", "step2", "step3"] as const).map((step, i) => {
@@ -153,7 +153,7 @@ export default function LandingPage() {
           <h2 className="mt-3 font-serif text-2xl font-bold text-ebene md:text-3xl">
             {t("languages.title")}
           </h2>
-          <div className="mx-auto mt-3 h-[1px] w-12 bg-or" />
+          <div className="mx-auto mt-3 h-px w-12 bg-or" />
           <p className="mt-4 text-ebene/60">{t("languages.subtitle")}</p>
 
           <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -195,7 +195,7 @@ export default function LandingPage() {
           <h2 className="mt-3 font-serif text-2xl font-bold text-white md:text-3xl">
             {t("interactive.title")}
           </h2>
-          <div className="mx-auto mt-3 h-[1px] w-12 bg-or" />
+          <div className="mx-auto mt-3 h-px w-12 bg-or" />
 
           <div className="mt-10">
             <InteractiveProverb />
@@ -214,7 +214,7 @@ export default function LandingPage() {
           <h2 className="mt-3 text-center font-serif text-2xl font-bold text-ebene md:text-3xl">
             {t("testimonials.title")}
           </h2>
-          <div className="mx-auto mt-3 h-[1px] w-12 bg-or" />
+          <div className="mx-auto mt-3 h-px w-12 bg-or" />
 
           <div className="mt-12 grid gap-6 md:grid-cols-3">
             {TESTIMONIALS.map(({ quote, name, origin }) => (
@@ -226,7 +226,7 @@ export default function LandingPage() {
                 <p className="mt-3 font-serif text-sm italic leading-relaxed text-ebene/80">
                   {quote}
                 </p>
-                <div className="mt-4 h-[1px] w-8 bg-or/30" />
+                <div className="mt-4 h-px w-8 bg-or/30" />
                 <p className="mt-3 text-sm font-bold text-ebene">{name}</p>
                 <p className="text-xs text-ebene/50">{origin}</p>
               </div>
@@ -244,7 +244,7 @@ export default function LandingPage() {
           <h2 className="mt-4 font-serif text-2xl font-bold text-ebene md:text-3xl">
             {t("cta.title")}
           </h2>
-          <div className="mx-auto mt-3 h-[1px] w-12 bg-or" />
+          <div className="mx-auto mt-3 h-px w-12 bg-or" />
           <p className="mt-4 text-ebene/60">{t("cta.subtitle")}</p>
           <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Link
