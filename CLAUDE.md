@@ -831,15 +831,15 @@ fontFamily: {
 
 **Objectif** : L'utilisateur peut recevoir et consulter son adage du jour.
 
-- [ ] Page d'accueil `/accueil` avec l'adage du jour
-- [ ] Algorithme de sélection quotidienne (par langue, sans répétition)
-- [ ] CRUD adages (admin)
-- [ ] Server Action : marquer un adage comme lu
-- [ ] API Route Handler : endpoint adage du jour
-- [ ] Template email React Email pour l'adage quotidien
-- [ ] Configuration Vercel Cron job pour envoi quotidien
-- [ ] Page profil avec sélecteur d'origines (pays/ethnie/langue)
-- [ ] Préférences email quotidien (activer/désactiver)
+- [x] Page d'accueil `/accueil` avec l'adage du jour
+- [x] Algorithme de sélection quotidienne (par langue, sans répétition)
+- [x] CRUD adages (admin)
+- [x] Server Action : marquer un adage comme lu
+- [x] API Route Handler : endpoint adage du jour
+- [x] Template email React Email pour l'adage quotidien
+- [x] Configuration Vercel Cron job pour envoi quotidien
+- [x] Page profil avec sélecteur d'origines (pays/ethnie/langue)
+- [x] Préférences email quotidien (activer/désactiver)
 
 ### Phase 3 — Audio & Prononciation 🔊
 
