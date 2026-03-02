@@ -45,3 +45,6 @@ next-env.d.ts
 # prisma generated client
 /lib/generated/prisma
 .CLAUDE/
+
+# Claude Code — source de vérité IA locale uniquement
+CLAUDE.md
