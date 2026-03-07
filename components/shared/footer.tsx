@@ -5,27 +5,27 @@ export function Footer() {
   const t = useTranslations("footer");
 
   return (
-    <footer className="border-t border-or/10 bg-surface py-12 md:py-16">
-      <div className="mx-auto max-w-6xl px-4">
+    <footer className="border-t border-or/10 bg-surface py-16 md:py-20">
+      <div className="mx-auto max-w-7xl px-6">
         {/* Grid principal */}
-        <div className="grid gap-8 md:grid-cols-4">
+        <div className="grid gap-12 md:grid-cols-3">
           {/* Colonne 1 — Marque */}
-          <div>
+          <div className="md:col-span-1">
             <span className="font-serif text-2xl font-bold text-ebene">
               Gbé
             </span>
-            <p className="mt-3 font-serif text-sm italic text-ebene/50">
+            <p className="mt-4 font-serif text-sm italic leading-relaxed text-ebene/50">
               {t("tagline")}
             </p>
-            <div className="mt-4 h-px w-12 bg-or" />
+            <div className="mt-6 h-px w-12 bg-or" />
           </div>
 
           {/* Colonne 2 — Application */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-terre">
+            <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-terre">
               {t("sections.app.title")}
             </h4>
-            <ul className="mt-3 space-y-2">
+            <ul className="mt-4 space-y-3">
               <li>
                 <Link
                   href="/accueil"
@@ -36,97 +36,51 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/profil"
-                  className="text-sm text-ebene/60 transition-colors hover:text-terre"
-                >
-                  {t("sections.app.profile")}
-                </Link>
-              </li>
-              <li>
-                <Link
                   href="/contributions"
                   className="text-sm text-ebene/60 transition-colors hover:text-terre"
                 >
-                  {t("sections.app.contribute")}
+                  {t("sections.app.library")}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="#languages"
+                  className="text-sm text-ebene/60 transition-colors hover:text-terre"
+                >
+                  {t("sections.app.languages")}
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Colonne 3 — Communauté */}
+          {/* Colonne 3 — Contact */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-terre">
-              {t("sections.community.title")}
+            <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-terre">
+              {t("sections.contact.title")}
             </h4>
-            <ul className="mt-3 space-y-2">
+            <ul className="mt-4 space-y-3">
               <li>
-                <Link
-                  href="#"
+                <a
+                  href="mailto:degboejoachim@gmail.com"
                   className="text-sm text-ebene/60 transition-colors hover:text-terre"
                 >
-                  {t("sections.community.about")}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-sm text-ebene/60 transition-colors hover:text-terre"
-                >
-                  {t("sections.community.blog")}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-sm text-ebene/60 transition-colors hover:text-terre"
-                >
-                  {t("sections.community.contact")}
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Colonne 4 — Légal */}
-          <div>
-            <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-terre">
-              {t("sections.legal.title")}
-            </h4>
-            <ul className="mt-3 space-y-2">
-              <li>
-                <Link
-                  href="#"
-                  className="text-sm text-ebene/60 transition-colors hover:text-terre"
-                >
-                  {t("sections.legal.privacy")}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-sm text-ebene/60 transition-colors hover:text-terre"
-                >
-                  {t("sections.legal.terms")}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="text-sm text-ebene/60 transition-colors hover:text-terre"
-                >
-                  {t("sections.legal.cookies")}
-                </Link>
+                  {t("sections.contact.email")}
+                </a>
               </li>
             </ul>
           </div>
         </div>
 
         {/* Barre basse */}
-        <div className="mt-12 border-t border-or/10 pt-6">
-          <div className="flex flex-col items-center justify-between gap-3 md:flex-row">
+        <div className="mt-16">
+          <div className="h-px w-full bg-or/10" />
+          <div className="flex flex-col items-center justify-between gap-4 pt-8 md:flex-row">
             <p className="text-xs text-ebene/40">
-              © {new Date().getFullYear()} Gbé — {t("rights")}
+              © {new Date().getFullYear()} {t("rights")}
             </p>
-            <p className="text-xs text-ebene/40">{t("bottom.tagline")}</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-ebene/30">
+              {t("bottom.tagline")}
+            </p>
           </div>
         </div>
       </div>

@@ -18,8 +18,8 @@ export function LandingNav() {
   const t = useTranslations("landing.nav");
 
   return (
-    <nav className="sticky top-0 z-50 bg-sable/80 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
+    <nav className="sticky top-0 z-50 border-b border-or/20 bg-sable/80 backdrop-blur-md">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
         {/* Logo */}
         <Link href="/" className="font-serif text-2xl font-bold text-ebene">
           Gbé
@@ -31,16 +31,26 @@ export function LandingNav() {
             <a
               key={labelKey}
               href={href}
-              className="text-sm text-ebene/70 transition-colors hover:text-terre"
+              className="text-xs font-bold uppercase tracking-[0.2em] text-ebene/60 transition-colors hover:text-terre"
             >
               {t(labelKey)}
             </a>
           ))}
+        </div>
+
+        {/* Desktop CTA */}
+        <div className="hidden items-center gap-3 md:flex">
           <Link
             href="/login"
+            className="rounded-full border border-or px-5 py-2 text-xs font-bold uppercase tracking-[0.2em] text-ebene transition-all hover:bg-or/5"
+          >
+            {t("login")}
+          </Link>
+          <Link
+            href="/register"
             className="rounded-full bg-terre px-5 py-2 text-xs font-bold uppercase tracking-[0.2em] text-white transition-all hover:bg-terre/90"
           >
-            {t("cta")}
+            {t("signup")}
           </Link>
         </div>
 
@@ -59,9 +69,6 @@ export function LandingNav() {
         </button>
       </div>
 
-      {/* Gradient line */}
-      <div className="h-px bg-linear-to-r from-terre via-or to-terre" />
-
       {/* Mobile menu */}
       <AnimatePresence>
         {menuOpen && (
@@ -70,26 +77,35 @@ export function LandingNav() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="overflow-hidden border-b border-or/10 bg-surface md:hidden"
+            className="overflow-hidden border-t border-or/10 bg-surface md:hidden"
           >
-            <div className="flex flex-col gap-4 px-4 py-6">
+            <div className="flex flex-col gap-4 px-6 py-6">
               {NAV_LINKS.map(({ href, labelKey }) => (
                 <a
                   key={labelKey}
                   href={href}
-                  className="text-sm text-ebene/70 transition-colors hover:text-terre"
+                  className="text-xs font-bold uppercase tracking-[0.2em] text-ebene/60 transition-colors hover:text-terre"
                   onClick={() => setMenuOpen(false)}
                 >
                   {t(labelKey)}
                 </a>
               ))}
-              <Link
-                href="/login"
-                className="mt-2 inline-block rounded-full bg-terre px-5 py-2 text-center text-xs font-bold uppercase tracking-[0.2em] text-white transition-all hover:bg-terre/90"
-                onClick={() => setMenuOpen(false)}
-              >
-                {t("cta")}
-              </Link>
+              <div className="mt-2 flex flex-col gap-3">
+                <Link
+                  href="/login"
+                  className="inline-block rounded-full border border-or px-5 py-2.5 text-center text-xs font-bold uppercase tracking-[0.2em] text-ebene transition-all hover:bg-or/5"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {t("login")}
+                </Link>
+                <Link
+                  href="/register"
+                  className="inline-block rounded-full bg-terre px-5 py-2.5 text-center text-xs font-bold uppercase tracking-[0.2em] text-white transition-all hover:bg-terre/90"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {t("signup")}
+                </Link>
+              </div>
             </div>
           </motion.div>
         )}

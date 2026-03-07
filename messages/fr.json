@@ -28,72 +28,83 @@
   },
   "landing": {
     "nav": {
-      "how": "Comment ça marche",
+      "how": "Concept",
       "languages": "Langues",
-      "proverbs": "Proverbes",
-      "testimonials": "Témoignages",
-      "cta": "Commencer",
+      "proverbs": "L'Expérience",
+      "testimonials": "Notre Mission",
+      "login": "Se connecter",
+      "signup": "S'inscrire",
       "openMenu": "Ouvrir le menu",
       "closeMenu": "Fermer le menu"
     },
     "hero": {
-      "label": "Patrimoine linguistique africain",
-      "title": "La sagesse de vos ancêtres,",
-      "titleAccent": "chaque jour.",
-      "subtitle": "Recevez un adage quotidien dans votre langue africaine d'origine, avec traduction et explication culturelle.",
-      "cta": "Commencer gratuitement",
-      "ctaSecondary": "Découvrir les langues"
+      "label": "Héritage Oral & Sagesse Ancestrale",
+      "title": "Reconnectez-vous à vos racines,",
+      "titleAccent": "un mot à la fois.",
+      "subtitle": "Recevez chaque matin un proverbe ancestral dans votre langue d'origine. Redécouvrez la puissance de la sagesse africaine à travers ses plus beaux adages.",
+      "cta": "S'inscrire",
+      "ctaSecondary": "Se connecter"
     },
     "mockup": {
-      "label": "Fon — Bénin",
-      "proverb": "« Gbédoto wɛ nyi agbaza »",
-      "translation": "Le destin est le corps — Ce que nous sommes est notre destinée."
+      "ritualLabel": "Rituel du jour",
+      "date": "7 Mars 2026",
+      "proverb": "« Dokpo kpo dokpo kpo wɛ nɔ nyí gbɛ̀ »",
+      "translation": "Un à un, c'est ainsi que se construit la vie.",
+      "langBadge": "FON",
+      "origin": "Bénin · Gbé"
     },
     "howItWorks": {
-      "label": "Comment ça marche",
-      "title": "Trois étapes vers la sagesse",
+      "label": "Le Rituel",
+      "title": "Une infusion culturelle quotidienne",
       "step1": {
-        "title": "Créez votre profil",
-        "description": "Renseignez vos origines : pays, ethnie, langue."
+        "title": "Choisissez vos racines",
+        "description": "Renseignez vos origines : pays, ethnie, langue. Sélectionnez une ou plusieurs langues pour personnaliser votre rituel."
       },
       "step2": {
-        "title": "Recevez votre adage",
-        "description": "Chaque jour, un proverbe dans votre langue d'origine."
+        "title": "Éveil Matinal",
+        "description": "Chaque matin, découvrez un nouveau proverbe dans votre langue d'origine. Un rendez-vous sacré avec vos ancêtres."
       },
       "step3": {
-        "title": "Explorez et partagez",
-        "description": "Découvrez la signification culturelle et partagez la sagesse."
+        "title": "Comprenez l'essence",
+        "description": "Texte original, traduction littérale, explication culturelle et contexte d'usage. Chaque proverbe devient une leçon vivante."
       }
     },
     "languages": {
-      "label": "Langues disponibles",
-      "title": "Les langues de la sagesse",
-      "subtitle": "Fon, Yoruba, Bambara, Éwé, Wolof et bien d'autres…",
+      "label": "Patrimoine",
+      "title": "Un voyage à travers les langues du continent",
       "viewAll": "Voir toutes les langues"
     },
     "interactive": {
-      "label": "Explorez un proverbe",
-      "title": "La parole a un sens caché",
+      "label": "L'anatomie d'une sagesse",
+      "title": "Plus qu'une simple phrase",
       "tabs": {
-        "origin": "Original",
+        "origin": "Langue Originale",
         "translation": "Traduction",
-        "context": "Contexte"
+        "context": "Sagesse & Contexte"
       },
       "content": {
-        "origin": "« Ọ̀rúnmìlà ni baba àwọn Ifá »",
-        "translation": "Orunmila est le père de l'Ifá — La source de la divination et de la sagesse Yoruba.",
-        "context": "Ce proverbe est récité lors des cérémonies Ifá pour invoquer la guidance des ancêtres et honorer la tradition orale Yoruba."
+        "originLabel": "Texte Original · Fon",
+        "origin": "« Alɔ ɖokpo nɔ sà amì ǎ »",
+        "translationLabel": "Traduction Littérale",
+        "translation": "« Une seule main ne peut vendre de l'huile. »",
+        "contextLabel": "Contexte & Usage",
+        "context": "Ce proverbe Fon du Bénin souligne l'importance de l'entraide et de la communauté. Il est traditionnellement utilisé pour rappeler qu'aucune réussite n'est possible seul. Dans les marchés du Bénin, vendre de l'huile de palme nécessite deux mains : une pour tenir le récipient, une pour verser. C'est une métaphore puissante de la solidarité africaine.",
+        "contextSource": "Tradition Orale Fon",
+        "contextRegion": "Sud-Bénin"
       }
     },
     "testimonials": {
-      "label": "Témoignages",
-      "title": "Ce que dit la communauté"
+      "label": "Pourquoi Gbé",
+      "title": "Le mot du fondateur",
+      "founderQuote": "En grandissant, j'ai réalisé que les proverbes de mes grands-parents s'effaçaient doucement de ma mémoire. Ces paroles portent des siècles de sagesse, de philosophie de vie, de vision du monde. Gbé est né de ce constat : si nous ne créons pas un pont entre notre héritage oral et notre quotidien moderne, nous risquons de perdre une richesse inestimable. Chaque proverbe est une leçon de vie transmise par nos ancêtres, il serait dommage qu'elle s'arrête à notre génération.",
+      "founderName": "Joachim Degboe",
+      "founderRole": "Fondateur de Gbé · Bénin"
     },
     "cta": {
-      "title": "Reconnectez-vous à vos racines",
-      "subtitle": "Rejoignez Gbé et redécouvrez la richesse de votre patrimoine linguistique.",
-      "button": "Créer mon compte",
-      "secondary": "En savoir plus"
+      "title": "Commencez votre rituel aujourd'hui",
+      "subtitle": "Rejoignez des milliers de membres de la diaspora qui redécouvrent la richesse de leurs cultures chaque matin.",
+      "button": "S'inscrire gratuitement",
+      "secondary": "Découvrir les offres"
     }
   },
   "auth": {
@@ -333,26 +344,18 @@
     }
   },
   "footer": {
-    "tagline": "La sagesse africaine, un adage à la fois.",
-    "rights": "Tous droits réservés.",
+    "tagline": "Le trait d'union entre l'héritage ancestral et la vie moderne.",
+    "rights": "Gbé. Langue · Vie · Héritage",
     "sections": {
       "app": {
         "title": "Application",
-        "daily": "Adage du jour",
-        "profile": "Mon profil",
-        "contribute": "Contribuer"
+        "daily": "Rituel Quotidien",
+        "library": "Bibliothèque",
+        "languages": "Langues"
       },
-      "community": {
-        "title": "Communauté",
-        "about": "À propos",
-        "blog": "Blog",
-        "contact": "Contact"
-      },
-      "legal": {
-        "title": "Légal",
-        "privacy": "Confidentialité",
-        "terms": "Conditions d'utilisation",
-        "cookies": "Cookies"
+      "contact": {
+        "title": "Contact",
+        "email": "degboejoachim@gmail.com"
       }
     },
     "bottom": {
