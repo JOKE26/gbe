@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState, useRef, useTransition } from "react";
 import { useTranslations } from "next-intl";
 import {
   Dialog,
@@ -22,6 +22,8 @@ import {
   createAdage,
   updateAdage,
 } from "@/app/(dashboard)/admin/adages/actions";
+import { cn } from "@/lib/utils";
+import { Upload, Volume2, X } from "lucide-react";
 import type { Adage, Langue, Pays } from "@/lib/generated/prisma/client";
 
 interface LangueWithPays extends Langue {
@@ -43,21 +45,52 @@ export function AdageFormDialog({ langues, adage }: AdageFormDialogProps) {
   const t = useTranslations("admin.adages");
   const [open, setOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
+  const [audioFileName, setAudioFileName] = useState<string | null>(null);
+  const [removeAudio, setRemoveAudio] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const isEdit = Boolean(adage);
+  const hasExistingAudio = Boolean(adage?.audioUrl) && !removeAudio;
 
   function handleSubmit(formData: FormData) {
+    if (removeAudio) {
+      formData.set("removeAudio", "true");
+    }
     startTransition(async () => {
       if (isEdit && adage) {
         await updateAdage(adage.id, formData);
       } else {
         await createAdage(formData);
       }
+      setAudioFileName(null);
+      setRemoveAudio(false);
       setOpen(false);
     });
   }
 
+  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    setAudioFileName(file ? file.name : null);
+    setRemoveAudio(false);
+  }
+
+  function handleRemoveAudio() {
+    setRemoveAudio(true);
+    setAudioFileName(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  }
+
+  function handleOpenChange(isOpen: boolean) {
+    setOpen(isOpen);
+    if (!isOpen) {
+      setAudioFileName(null);
+      setRemoveAudio(false);
+    }
+  }
+
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
         {isEdit ? (
           <button
@@ -203,6 +236,81 @@ export function AdageFormDialog({ langues, adage }: AdageFormDialogProps) {
               className="rounded-xl border-or/20"
               placeholder={t("placeholderSource")}
             />
+          </div>
+
+          {/* Fichier audio (optionnel) */}
+          <div className="space-y-2">
+            <Label
+              htmlFor="audio"
+              className="text-xs font-bold uppercase tracking-[0.2em] text-ebene/70"
+            >
+              {t("fieldAudio")}
+            </Label>
+
+            {/* Audio existant */}
+            {hasExistingAudio && !audioFileName && (
+              <div className="flex items-center gap-3 rounded-xl border border-or/10 bg-sable px-4 py-3">
+                <Volume2 className="h-4 w-4 shrink-0 text-terre" />
+                <span className="min-w-0 flex-1 truncate text-sm text-ebene/70">
+                  {t("audioCurrent")}
+                </span>
+                <button
+                  type="button"
+                  onClick={handleRemoveAudio}
+                  className="shrink-0 rounded-full p-1 text-ebene/40 transition-colors hover:bg-destructive/10 hover:text-destructive"
+                  title={t("audioRemove")}
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+            )}
+
+            {/* Zone d'upload */}
+            <div
+              className={cn(
+                "relative rounded-xl border-2 border-dashed border-or/20 transition-colors hover:border-terre/30",
+                audioFileName && "border-terre/30 bg-terre/5",
+              )}
+            >
+              <input
+                ref={fileInputRef}
+                id="audio"
+                name="audio"
+                type="file"
+                accept="audio/mpeg,audio/mp3,audio/wav,audio/ogg,audio/webm,audio/aac,audio/mp4"
+                onChange={handleFileChange}
+                className="absolute inset-0 z-10 cursor-pointer opacity-0"
+              />
+              <div className="flex flex-col items-center justify-center px-4 py-5">
+                <Upload
+                  className={cn(
+                    "h-5 w-5",
+                    audioFileName ? "text-terre" : "text-ebene/30",
+                  )}
+                />
+                <p className="mt-2 text-center text-sm text-ebene/50">
+                  {audioFileName ??
+                    (hasExistingAudio ? t("audioChange") : t("audioUpload"))}
+                </p>
+                <p className="mt-1 text-center text-xs text-ebene/30">
+                  {t("audioHint")}
+                </p>
+              </div>
+            </div>
+
+            {/* Bouton supprimer si un nouveau fichier est sélectionné */}
+            {audioFileName && (
+              <button
+                type="button"
+                onClick={() => {
+                  setAudioFileName(null);
+                  if (fileInputRef.current) fileInputRef.current.value = "";
+                }}
+                className="text-xs text-destructive transition-colors hover:text-destructive/70"
+              >
+                {t("audioRemove")}
+              </button>
+            )}
           </div>
 
           {/* Boutons */}

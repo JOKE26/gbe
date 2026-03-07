@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect, useTransition } from "react";
+import { useState, useTransition } from "react";
 import { useTranslations } from "next-intl";
+import { useQuery } from "@tanstack/react-query";
 import { addOrigine, removeOrigine } from "@/app/(dashboard)/profil/actions";
 import { LangueBadge } from "@/components/features/profil/langue-badge";
 import { cn } from "@/lib/utils";
@@ -24,63 +25,52 @@ interface OrigineSelectorProps {
   origines: ExistingOrigine[];
 }
 
+async function fetchGeo(params: Record<string, string>): Promise<GeoItem[]> {
+  const searchParams = new URLSearchParams(params);
+  const res = await fetch(`/api/geo?${searchParams.toString()}`);
+  if (!res.ok) throw new Error("Erreur chargement données géographiques");
+  return res.json() as Promise<GeoItem[]>;
+}
+
 export function OrigineSelector({ origines }: OrigineSelectorProps) {
   const t = useTranslations("dashboard.profil");
   const [isAdding, setIsAdding] = useState(false);
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
 
-  // Form state
-  const [paysList, setPaysList] = useState<GeoItem[]>([]);
-  const [ethniesList, setEthniesList] = useState<GeoItem[]>([]);
-  const [languesList, setLanguesList] = useState<GeoItem[]>([]);
-
   const [selectedPaysId, setSelectedPaysId] = useState("");
   const [selectedEthnieId, setSelectedEthnieId] = useState("");
   const [selectedLangueId, setSelectedLangueId] = useState("");
 
-  // Charger la liste des pays au montage
-  useEffect(() => {
-    fetch("/api/geo?type=pays")
-      .then((res) => res.json())
-      .then((data: GeoItem[]) => setPaysList(data))
-      .catch(() => setPaysList([]));
-  }, []);
+  // Charger la liste des pays (cache long — données statiques)
+  const { data: paysList = [] } = useQuery({
+    queryKey: ["geo", "pays"],
+    queryFn: () => fetchGeo({ type: "pays" }),
+    staleTime: 1000 * 60 * 60, // 1 heure
+  });
 
   // Charger les ethnies quand un pays est sélectionné
-  useEffect(() => {
-    if (!selectedPaysId) {
-      setEthniesList([]);
-      setSelectedEthnieId("");
-      return;
-    }
-    fetch(`/api/geo?type=ethnies&paysId=${selectedPaysId}`)
-      .then((res) => res.json())
-      .then((data: GeoItem[]) => setEthniesList(data))
-      .catch(() => setEthniesList([]));
-    setSelectedEthnieId("");
-    setSelectedLangueId("");
-  }, [selectedPaysId]);
+  const { data: ethniesList = [] } = useQuery({
+    queryKey: ["geo", "ethnies", selectedPaysId],
+    queryFn: () => fetchGeo({ type: "ethnies", paysId: selectedPaysId }),
+    enabled: !!selectedPaysId,
+    staleTime: 1000 * 60 * 30, // 30 minutes
+  });
 
-  // Charger les langues quand un pays ou une ethnie est sélectionné
-  useEffect(() => {
-    if (!selectedPaysId) {
-      setLanguesList([]);
-      setSelectedLangueId("");
-      return;
-    }
-    const params = new URLSearchParams({
-      type: "langues",
-      paysId: selectedPaysId,
-    });
-    if (selectedEthnieId) params.set("ethnieId", selectedEthnieId);
-
-    fetch(`/api/geo?${params.toString()}`)
-      .then((res) => res.json())
-      .then((data: GeoItem[]) => setLanguesList(data))
-      .catch(() => setLanguesList([]));
-    setSelectedLangueId("");
-  }, [selectedPaysId, selectedEthnieId]);
+  // Charger les langues quand un pays (et éventuellement une ethnie) est sélectionné
+  const { data: languesList = [] } = useQuery({
+    queryKey: ["geo", "langues", selectedPaysId, selectedEthnieId],
+    queryFn: () => {
+      const params: Record<string, string> = {
+        type: "langues",
+        paysId: selectedPaysId,
+      };
+      if (selectedEthnieId) params.ethnieId = selectedEthnieId;
+      return fetchGeo(params);
+    },
+    enabled: !!selectedPaysId,
+    staleTime: 1000 * 60 * 30, // 30 minutes
+  });
 
   function resetForm() {
     setSelectedPaysId("");
@@ -168,7 +158,11 @@ export function OrigineSelector({ origines }: OrigineSelectorProps) {
               </label>
               <select
                 value={selectedPaysId}
-                onChange={(e) => setSelectedPaysId(e.target.value)}
+                onChange={(e) => {
+                  setSelectedPaysId(e.target.value);
+                  setSelectedEthnieId("");
+                  setSelectedLangueId("");
+                }}
                 className="w-full rounded-xl border border-or/20 bg-surface px-3 py-2.5 text-sm text-ebene focus:border-terre/40 focus:outline-none focus:ring-1 focus:ring-terre/20"
               >
                 <option value="">{t("selectCountry")}</option>
@@ -187,7 +181,10 @@ export function OrigineSelector({ origines }: OrigineSelectorProps) {
               </label>
               <select
                 value={selectedEthnieId}
-                onChange={(e) => setSelectedEthnieId(e.target.value)}
+                onChange={(e) => {
+                  setSelectedEthnieId(e.target.value);
+                  setSelectedLangueId("");
+                }}
                 disabled={!selectedPaysId || ethniesList.length === 0}
                 className={cn(
                   "w-full rounded-xl border border-or/20 bg-surface px-3 py-2.5 text-sm text-ebene focus:border-terre/40 focus:outline-none focus:ring-1 focus:ring-terre/20",

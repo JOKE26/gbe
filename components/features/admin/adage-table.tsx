@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { useTransition } from "react";
 import { cn } from "@/lib/utils";
+import { Volume2 } from "lucide-react";
 import { AdageFormDialog } from "@/components/features/admin/adage-form-dialog";
 import {
   deleteAdage,
@@ -111,9 +112,17 @@ function AdageRow({
     >
       {/* Texte original — tronqué à ~60 caractères */}
       <td className="max-w-xs px-4 py-3">
-        <p className="truncate font-serif italic text-ebene">
-          {adage.texteOriginal}
-        </p>
+        <div className="flex items-center gap-2">
+          <p className="truncate font-serif italic text-ebene">
+            {adage.texteOriginal}
+          </p>
+          {adage.audioUrl && (
+            <Volume2
+              className="h-3.5 w-3.5 shrink-0 text-terre/60"
+              aria-label="Audio"
+            />
+          )}
+        </div>
       </td>
 
       {/* Langue — masquée sur mobile */}

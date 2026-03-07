@@ -25,6 +25,7 @@ export async function GET() {
       explication: quotidien.adage.explication,
       contexteUsage: quotidien.adage.contexteUsage,
       source: quotidien.adage.source,
+      audioUrl: quotidien.adage.audioUrl,
       langue: {
         id: quotidien.adage.langue.id,
         nom: quotidien.adage.langue.nom,

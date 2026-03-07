@@ -10,6 +10,8 @@ const envSchema = z.object({
   EMAIL_FROM: z.string().min(1),
   NEXT_PUBLIC_APP_URL: z.string().url(),
   CRON_SECRET: z.string().min(16),
+  SUPABASE_URL: z.string().url(),
+  SUPABASE_SERVICE_ROLE_KEY: z.string().min(1),
 });
 
 export const env = envSchema.parse(process.env);

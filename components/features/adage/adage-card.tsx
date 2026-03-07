@@ -2,8 +2,16 @@
 
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
-import { BookOpen, Globe, MessageCircle, Quote, Info } from "lucide-react";
+import {
+  BookOpen,
+  Globe,
+  MessageCircle,
+  Quote,
+  Info,
+  Volume2,
+} from "lucide-react";
 import { AdageReadButton } from "@/components/features/adage/adage-read-button";
+import { AdageAudioPlayer } from "@/components/features/adage/adage-audio-player";
 
 interface AdageCardProps {
   quotidienId: string;
@@ -12,6 +20,7 @@ interface AdageCardProps {
   explication: string;
   contexteUsage?: string | null;
   source?: string | null;
+  audioUrl?: string | null;
   langueNom: string;
   langueCode: string;
   lu: boolean;
@@ -25,6 +34,7 @@ export function AdageCard({
   explication,
   contexteUsage,
   source,
+  audioUrl,
   langueNom,
   langueCode,
   lu,
@@ -112,6 +122,20 @@ export function AdageCard({
             </p>
           </div>
         )}
+
+        {/* Audio — Player ou fallback */}
+        <div className="mt-4">
+          {audioUrl ? (
+            <AdageAudioPlayer audioUrl={audioUrl} />
+          ) : (
+            <div className="flex items-center gap-2 rounded-xl border border-dashed border-or/15 px-4 py-3">
+              <Volume2 className="h-4 w-4 text-ebene/25" />
+              <span className="text-xs text-ebene/30">
+                {t("audio.noAudio")}
+              </span>
+            </div>
+          )}
+        </div>
 
         {/* Source + Actions */}
         <div className="mt-6 flex items-center justify-between">

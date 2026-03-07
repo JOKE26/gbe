@@ -32,6 +32,7 @@ export default async function AccueilPage() {
             explication={quotidien.adage.explication}
             contexteUsage={quotidien.adage.contexteUsage}
             source={quotidien.adage.source}
+            audioUrl={quotidien.adage.audioUrl}
             langueNom={quotidien.adage.langue.nom}
             langueCode={quotidien.adage.langue.code}
             lu={quotidien.lu}

@@ -181,7 +181,15 @@
     "source": "Source",
     "language": "Langue",
     "share": "Partager",
-    "listen": "Écouter"
+    "listen": "Écouter",
+    "audio": {
+      "play": "Écouter la prononciation",
+      "pause": "Mettre en pause",
+      "loading": "Chargement audio\u2026",
+      "error": "Impossible de charger l\u2019audio",
+      "noAudio": "Audio non disponible",
+      "retry": "Réessayer"
+    }
   },
   "admin": {
     "adages": {
@@ -216,6 +224,12 @@
       "placeholderExplication": "Signification culturelle et profonde du proverbe…",
       "placeholderContexte": "Quand et comment ce proverbe est utilisé…",
       "placeholderSource": "Ex : Tradition orale Fon, Bénin",
+      "fieldAudio": "Fichier audio",
+      "audioHint": "MP3, WAV, OGG, WebM ou AAC — 10 Mo max",
+      "audioUpload": "Choisir un fichier audio",
+      "audioChange": "Remplacer l\u2019audio",
+      "audioRemove": "Supprimer l\u2019audio",
+      "audioCurrent": "Audio actuel",
       "statut": {
         "pending": "En attente",
         "approved": "Approuvé",

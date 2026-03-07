@@ -3,6 +3,7 @@
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { contributionSchema } from "@/lib/validators";
+import { uploadAudio, deleteAudio } from "@/lib/supabase-storage";
 import { revalidatePath } from "next/cache";
 import type { AdageStatut } from "@/lib/generated/prisma/client";
 
@@ -17,6 +18,20 @@ async function requireAdmin() {
     throw new Error("Accès refusé — rôle insuffisant");
   }
   return session.user;
+}
+
+/**
+ * Extrait et uploade le fichier audio depuis le FormData si présent.
+ * @returns L'URL publique de l'audio, ou undefined si aucun fichier.
+ */
+async function handleAudioUpload(
+  formData: FormData,
+): Promise<string | undefined> {
+  const audioFile = formData.get("audio");
+  if (!audioFile || !(audioFile instanceof File) || audioFile.size === 0) {
+    return undefined;
+  }
+  return uploadAudio(audioFile);
 }
 
 /**
@@ -35,9 +50,12 @@ export async function createAdage(formData: FormData) {
     langueId: formData.get("langueId"),
   });
 
+  const audioUrl = await handleAudioUpload(formData);
+
   await prisma.adage.create({
     data: {
       ...data,
+      audioUrl,
       statut: "APPROVED",
       contributeurId: user.id,
       validateurId: user.id,
@@ -49,7 +67,7 @@ export async function createAdage(formData: FormData) {
 
 /**
  * Met à jour un adage existant.
- * Seuls les champs textuels et la langue sont modifiables.
+ * Gère aussi le remplacement / la suppression du fichier audio.
  */
 export async function updateAdage(adageId: string, formData: FormData) {
   await requireAdmin();
@@ -63,9 +81,32 @@ export async function updateAdage(adageId: string, formData: FormData) {
     langueId: formData.get("langueId"),
   });
 
+  // Vérifier si on doit gérer l'audio
+  const removeAudio = formData.get("removeAudio") === "true";
+  const newAudioUrl = await handleAudioUpload(formData);
+
+  // Récupérer l'adage existant pour nettoyer l'ancien audio si nécessaire
+  const existing = await prisma.adage.findUniqueOrThrow({
+    where: { id: adageId },
+    select: { audioUrl: true },
+  });
+
+  // Supprimer l'ancien audio de Supabase Storage si on le remplace ou le supprime
+  if (existing.audioUrl && (newAudioUrl || removeAudio)) {
+    try {
+      await deleteAudio(existing.audioUrl);
+    } catch {
+      // Non bloquant — l'ancien fichier restera orphelin
+    }
+  }
+
   await prisma.adage.update({
     where: { id: adageId },
-    data,
+    data: {
+      ...data,
+      ...(newAudioUrl ? { audioUrl: newAudioUrl } : {}),
+      ...(removeAudio ? { audioUrl: null } : {}),
+    },
   });
 
   revalidatePath("/admin/adages");
@@ -91,11 +132,25 @@ export async function updateAdageStatut(adageId: string, statut: AdageStatut) {
 
 /**
  * Supprime définitivement un adage.
- * Supprime aussi les entrées AdageQuotidien liées (cascade manuelle
- * car Prisma ne supporte pas encore onDelete sur les relations implicites).
+ * Supprime aussi le fichier audio de Storage et les entrées AdageQuotidien liées.
  */
 export async function deleteAdage(adageId: string) {
   await requireAdmin();
+
+  // Récupérer l'adage pour supprimer l'audio associé
+  const existing = await prisma.adage.findUniqueOrThrow({
+    where: { id: adageId },
+    select: { audioUrl: true },
+  });
+
+  // Supprimer l'audio de Supabase Storage si présent
+  if (existing.audioUrl) {
+    try {
+      await deleteAudio(existing.audioUrl);
+    } catch {
+      // Non bloquant
+    }
+  }
 
   // Supprimer les références quotidiennes d'abord
   await prisma.adageQuotidien.deleteMany({

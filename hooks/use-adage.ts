@@ -13,6 +13,7 @@ interface AdageQuotidienResponse {
     explication: string;
     contexteUsage: string | null;
     source: string | null;
+    audioUrl: string | null;
     langue: {
       id: string;
       nom: string;
