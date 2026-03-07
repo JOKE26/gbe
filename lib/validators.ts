@@ -13,7 +13,6 @@ export const profileSchema = z.object({
   name: z.string().min(2).max(100),
   bio: z.string().max(500).optional(),
   preferredLangueId: z.string().cuid().optional(),
-  dailyEmailEnabled: z.boolean(),
 });
 
 export const origineSchema = z.object({

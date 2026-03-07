@@ -35,6 +35,7 @@ export async function GET(request: Request) {
 
       const langues = await prisma.langue.findMany({
         where,
+        distinct: ["nom"],
         orderBy: { nom: "asc" },
         select: { id: true, nom: true, code: true },
       });

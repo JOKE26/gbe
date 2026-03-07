@@ -1,15 +1,18 @@
-import { useTranslations } from "next-intl";
-import { PageHeader } from "@/components/shared/page-header";
+import { auth } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
+import { redirect } from "next/navigation";
+import { SettingsContent } from "@/components/features/parametres/settings-content";
 
-export default function ParametresPage() {
-  const t = useTranslations("dashboard.profil");
+export default async function ParametresPage() {
+  const session = await auth();
+  if (!session?.user?.id) redirect("/login");
+
+  const profile = await prisma.profile.findUnique({
+    where: { userId: session.user.id },
+    select: { dailyEmailEnabled: true },
+  });
 
   return (
-    <div>
-      <PageHeader title={t("preferences")} />
-      <div className="rounded-2xl border border-or/10 bg-surface p-8">
-        <p className="text-sm text-ebene/50">{t("dailyEmail")}</p>
-      </div>
-    </div>
+    <SettingsContent dailyEmailEnabled={profile?.dailyEmailEnabled ?? true} />
   );
 }

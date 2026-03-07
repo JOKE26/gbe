@@ -21,6 +21,7 @@
     "contributions": "Contributions",
     "settings": "Paramètres",
     "admin": "Administration",
+    "moderation": "Modération",
     "login": "Se connecter",
     "logout": "Se déconnecter",
     "register": "S'inscrire"
@@ -160,16 +161,68 @@
       "title": "Contributions",
       "subtitle": "Proposez des adages et suivez vos soumissions.",
       "submit": "Soumettre un adage",
+      "submitTitle": "Soumettre un nouvel adage",
+      "submitDescription": "Partagez un proverbe ou adage de votre culture. Il sera vérifié par un modérateur avant d'être publié.",
       "mySubmissions": "Mes soumissions",
+      "noSubmissions": "Vous n'avez encore soumis aucun adage.",
+      "noSubmissionsHint": "Partagez la sagesse de votre culture en soumettant un proverbe.",
+      "submitting": "Envoi en cours…",
+      "submitSuccess": "Adage soumis avec succès ! Un modérateur le vérifiera prochainement.",
+      "submitError": "Erreur lors de la soumission. Veuillez réessayer.",
+      "fieldLangue": "Langue",
+      "fieldOriginal": "Texte original",
+      "fieldTraduction": "Traduction littérale",
+      "fieldExplication": "Explication culturelle",
+      "fieldContexte": "Contexte d'usage",
+      "fieldSource": "Source / référence",
+      "selectLangue": "Choisir une langue",
+      "placeholderOriginal": "Le proverbe dans sa langue d'origine…",
+      "placeholderTraduction": "La traduction mot-à-mot en français…",
+      "placeholderExplication": "Signification profonde et contexte culturel…",
+      "placeholderContexte": "Quand et comment ce proverbe est utilisé…",
+      "placeholderSource": "Tradition orale, livre, etc.",
+      "fieldAudio": "Fichier audio (optionnel)",
+      "audioHint": "MP3, WAV, OGG, WebM ou AAC — 10 Mo max",
+      "audioUpload": "Ajouter un fichier audio",
+      "submittedOn": "Soumis le",
       "status": {
         "pending": "En attente",
         "approved": "Approuvé",
         "rejected": "Rejeté"
+      },
+      "stats": {
+        "title": "Mes statistiques",
+        "total": "Total",
+        "approved": "Approuvés",
+        "pending": "En attente",
+        "rejected": "Rejetés"
+      },
+      "badges": {
+        "title": "Badges",
+        "firstContribution": "Première contribution",
+        "firstContributionDesc": "Vous avez soumis votre premier adage",
+        "fiveApproved": "Sage contributeur",
+        "fiveApprovedDesc": "5 adages approuvés",
+        "tenApproved": "Gardien de la tradition",
+        "tenApprovedDesc": "10 adages approuvés",
+        "twentyFiveApproved": "Maître de la parole",
+        "twentyFiveApprovedDesc": "25 adages approuvés"
       }
     },
     "parametres": {
       "title": "Paramètres",
-      "subtitle": "Gérez vos préférences et notifications."
+      "subtitle": "Gérez vos préférences d'affichage et de notifications.",
+      "notifications": "Notifications",
+      "notificationsDescription": "Configurez la réception de vos emails.",
+      "dailyEmail": "Adage quotidien par email",
+      "dailyEmailDescription": "Recevez chaque matin un proverbe dans votre langue d'origine.",
+      "language": "Langue de l'interface",
+      "languageDescription": "Choisissez la langue d'affichage de l'application.",
+      "languageFr": "Français",
+      "languageEn": "English",
+      "languageComingSoon": "Bientôt disponible",
+      "saved": "Préférences enregistrées",
+      "saveError": "Erreur lors de l'enregistrement"
     }
   },
   "adage": {
@@ -235,6 +288,25 @@
         "approved": "Approuvé",
         "rejected": "Rejeté"
       }
+    },
+    "moderation": {
+      "title": "Modération",
+      "subtitle": "Vérifiez et validez les contributions de la communauté.",
+      "empty": "Aucune contribution en attente de modération.",
+      "pendingCount": "{count, plural, =0 {Aucune contribution} one {1 contribution} other {{count} contributions}} en attente",
+      "approve": "Approuver",
+      "reject": "Rejeter",
+      "approveConfirm": "Approuver cet adage ? Il sera visible par les utilisateurs.",
+      "rejectConfirm": "Rejeter cet adage ? Le contributeur sera notifié.",
+      "approved": "Adage approuvé avec succès",
+      "rejected": "Adage rejeté",
+      "columnOriginal": "Texte original",
+      "columnLangue": "Langue",
+      "columnContributeur": "Contributeur",
+      "columnDate": "Date",
+      "columnActions": "Actions",
+      "viewDetails": "Voir les détails",
+      "detailsTitle": "Détails de la contribution"
     }
   },
   "errors": {
@@ -245,6 +317,20 @@
     },
     "unauthorized": "Vous devez être connecté pour accéder à cette page.",
     "generic": "Une erreur inattendue est survenue. Veuillez réessayer."
+  },
+  "email": {
+    "contributionApproved": {
+      "subject": "Votre adage a été approuvé !",
+      "greeting": "Bonjour {name},",
+      "body": "Bonne nouvelle ! Votre contribution a été vérifiée et approuvée par notre équipe de modération.",
+      "cta": "Voir mes contributions"
+    },
+    "contributionRejected": {
+      "subject": "Mise à jour sur votre contribution",
+      "greeting": "Bonjour {name},",
+      "body": "Après vérification, votre contribution n'a malheureusement pas pu être retenue. N'hésitez pas à soumettre un nouvel adage !",
+      "cta": "Soumettre un nouvel adage"
+    }
   },
   "footer": {
     "tagline": "La sagesse africaine, un adage à la fois.",

@@ -43,12 +43,10 @@ export async function updateProfile(input: ProfileInput) {
       userId,
       bio: data.bio ?? null,
       preferredLangueId: data.preferredLangueId ?? null,
-      dailyEmailEnabled: data.dailyEmailEnabled,
     },
     update: {
       bio: data.bio ?? null,
       preferredLangueId: data.preferredLangueId ?? null,
-      dailyEmailEnabled: data.dailyEmailEnabled,
     },
   });
 

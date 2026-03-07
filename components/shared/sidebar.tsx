@@ -4,7 +4,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
-import { Home, User, BookOpen, Settings, ShieldCheck } from "lucide-react";
+import {
+  Home,
+  User,
+  BookOpen,
+  Settings,
+  ShieldCheck,
+  Scale,
+} from "lucide-react";
 
 const NAV_ITEMS = [
   { href: "/accueil", icon: Home, labelKey: "home" as const },
@@ -19,6 +26,7 @@ const NAV_ITEMS = [
 
 const ADMIN_ITEMS = [
   { href: "/admin/adages", icon: ShieldCheck, labelKey: "admin" as const },
+  { href: "/admin/moderation", icon: Scale, labelKey: "moderation" as const },
 ];
 
 interface SidebarProps {

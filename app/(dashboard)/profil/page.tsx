@@ -33,8 +33,9 @@ export default async function ProfilPage() {
 
   if (!user) redirect("/login");
 
-  // Charger toutes les langues pour le sélecteur de préférence
+  // Charger toutes les langues pour le sélecteur de préférence (dédupliquées par nom)
   const langues = await prisma.langue.findMany({
+    distinct: ["nom"],
     orderBy: { nom: "asc" },
     select: { id: true, nom: true },
   });
@@ -43,7 +44,6 @@ export default async function ProfilPage() {
     ? {
         bio: user.profile.bio,
         preferredLangueId: user.profile.preferredLangueId,
-        dailyEmailEnabled: user.profile.dailyEmailEnabled,
       }
     : null;
 

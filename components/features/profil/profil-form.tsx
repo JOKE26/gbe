@@ -21,7 +21,6 @@ interface ProfilFormProps {
   profile: {
     bio?: string | null;
     preferredLangueId?: string | null;
-    dailyEmailEnabled: boolean;
   } | null;
   langues: LangueOption[];
 }
@@ -37,9 +36,6 @@ export function ProfilForm({ user, profile, langues }: ProfilFormProps) {
   const [preferredLangueId, setPreferredLangueId] = useState(
     profile?.preferredLangueId ?? "",
   );
-  const [dailyEmailEnabled, setDailyEmailEnabled] = useState(
-    profile?.dailyEmailEnabled ?? true,
-  );
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -50,7 +46,6 @@ export function ProfilForm({ user, profile, langues }: ProfilFormProps) {
       name,
       bio: bio || undefined,
       preferredLangueId: preferredLangueId || undefined,
-      dailyEmailEnabled,
     };
 
     startTransition(async () => {
@@ -144,26 +139,6 @@ export function ProfilForm({ user, profile, langues }: ProfilFormProps) {
             </option>
           ))}
         </select>
-      </div>
-
-      <div className="h-px bg-or/10" />
-
-      {/* Préférences */}
-      <div>
-        <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-terre">
-          {t("preferences")}
-        </h3>
-        <div className="mt-2 h-px w-8 bg-or" />
-
-        <label className="mt-4 flex cursor-pointer items-center gap-3">
-          <input
-            type="checkbox"
-            checked={dailyEmailEnabled}
-            onChange={(e) => setDailyEmailEnabled(e.target.checked)}
-            className="h-4 w-4 rounded border-or/20 text-terre accent-terre focus:ring-terre/20"
-          />
-          <span className="text-sm text-ebene">{t("dailyEmail")}</span>
-        </label>
       </div>
 
       {/* Erreur / Succès */}
