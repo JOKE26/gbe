@@ -6,6 +6,7 @@ import { prisma } from "@/lib/prisma";
 import type { Role } from "@/lib/generated/prisma/client";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  trustHost: true,
   // SAFETY: PrismaAdapter has minor @auth/core version mismatch — safe to cast
   adapter: PrismaAdapter(prisma) as ReturnType<typeof PrismaAdapter>,
   providers: [
