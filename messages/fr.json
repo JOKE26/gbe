@@ -11,9 +11,12 @@
     "back": "Retour",
     "next": "Suivant",
     "previous": "Précédent",
-    "search": "Rechercher",
+    "search": "Rechercher…",
     "noResults": "Aucun résultat",
-    "toggleTheme": "Basculer le thème"
+    "toggleTheme": "Basculer le thème",
+    "filterLangue": "Langue",
+    "filterAllLangues": "Toutes les langues",
+    "clearFilters": "Réinitialiser"
   },
   "nav": {
     "home": "Accueil",
@@ -332,7 +335,16 @@
         "pending": "En attente",
         "approved": "Approuvé",
         "rejected": "Rejeté"
-      }
+      },
+      "searchPlaceholder": "Rechercher un adage…",
+      "filterLangue": "Langue",
+      "filterAllLangues": "Toutes les langues",
+      "filterStatut": "Statut",
+      "filterAllStatuts": "Tous les statuts",
+      "filterClear": "Réinitialiser",
+      "resultsCount": "{filtered} sur {total} adages",
+      "noFilterResults": "Aucun adage ne correspond aux filtres.",
+      "paginationInfo": "{start} à {end} sur {total}"
     },
     "moderation": {
       "title": "Modération",
@@ -351,7 +363,13 @@
       "columnDate": "Date",
       "columnActions": "Actions",
       "viewDetails": "Voir les détails",
-      "detailsTitle": "Détails de la contribution"
+      "detailsTitle": "Détails de la contribution",
+      "searchPlaceholder": "Rechercher une contribution…",
+      "filterLangue": "Langue",
+      "filterAllLangues": "Toutes les langues",
+      "filterClear": "Réinitialiser",
+      "resultsCount": "{filtered} sur {total} contributions",
+      "noFilterResults": "Aucune contribution ne correspond aux filtres."
     }
   },
   "errors": {

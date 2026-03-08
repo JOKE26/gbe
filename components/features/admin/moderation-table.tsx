@@ -1,11 +1,21 @@
 "use client";
 
+import { useState, useMemo, useCallback } from "react";
 import { useTransition } from "react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { moderateContribution } from "@/app/(dashboard)/admin/moderation/actions";
-import { CheckCircle2, XCircle, Eye } from "lucide-react";
+import { CheckCircle2, XCircle, Eye, Search, X } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Pagination } from "@/components/shared/pagination";
 import {
   Dialog,
   DialogContent,
@@ -30,8 +40,70 @@ interface ModerationTableProps {
   adages: Adage[];
 }
 
+const ITEMS_PER_PAGE = 10;
+
 export function ModerationTable({ adages }: ModerationTableProps) {
   const t = useTranslations("admin.moderation");
+  const [search, setSearch] = useState("");
+  const [langueFilter, setLangueFilter] = useState("all");
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Extraire les langues uniques de la liste des adages
+  const uniqueLangues = useMemo(() => {
+    const languesMap = new Map<string, string>();
+    for (const adage of adages) {
+      languesMap.set(adage.langue.nom, adage.langue.nom);
+    }
+    return Array.from(languesMap.values()).sort();
+  }, [adages]);
+
+  const filteredAdages = useMemo(() => {
+    const query = search.toLowerCase().trim();
+    return adages.filter((adage) => {
+      // Filtre recherche textuelle
+      if (query) {
+        const matchesText =
+          adage.texteOriginal.toLowerCase().includes(query) ||
+          adage.traductionLitterale.toLowerCase().includes(query) ||
+          (adage.contributeur?.name?.toLowerCase().includes(query) ?? false) ||
+          (adage.contributeur?.email?.toLowerCase().includes(query) ?? false);
+        if (!matchesText) return false;
+      }
+      // Filtre par langue
+      if (langueFilter !== "all" && adage.langue.nom !== langueFilter) {
+        return false;
+      }
+      return true;
+    });
+  }, [adages, search, langueFilter]);
+
+  const hasActiveFilters = search.length > 0 || langueFilter !== "all";
+
+  const totalPages = Math.ceil(filteredAdages.length / ITEMS_PER_PAGE);
+  const paginatedAdages = useMemo(
+    () =>
+      filteredAdages.slice(
+        (currentPage - 1) * ITEMS_PER_PAGE,
+        currentPage * ITEMS_PER_PAGE,
+      ),
+    [filteredAdages, currentPage],
+  );
+
+  const handleSearchChange = useCallback((value: string) => {
+    setSearch(value);
+    setCurrentPage(1);
+  }, []);
+
+  const handleLangueChange = useCallback((value: string) => {
+    setLangueFilter(value);
+    setCurrentPage(1);
+  }, []);
+
+  function clearFilters() {
+    setSearch("");
+    setLangueFilter("all");
+    setCurrentPage(1);
+  }
 
   if (adages.length === 0) {
     return (
@@ -43,10 +115,89 @@ export function ModerationTable({ adages }: ModerationTableProps) {
   }
 
   return (
-    <div className="space-y-3">
-      {adages.map((adage) => (
-        <ModerationCard key={adage.id} adage={adage} />
-      ))}
+    <div className="space-y-4">
+      {/* Barre de filtres */}
+      <div className="flex flex-col gap-3 rounded-2xl border border-or/10 bg-surface p-4 md:flex-row md:items-center">
+        {/* Recherche */}
+        <div className="relative flex-1">
+          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ebene/30" />
+          <Input
+            value={search}
+            onChange={(e) => handleSearchChange(e.target.value)}
+            placeholder={t("searchPlaceholder")}
+            className="rounded-xl border-or/20 pl-9 text-sm"
+          />
+        </div>
+
+        {/* Filtre langue */}
+        {uniqueLangues.length > 1 && (
+          <Select value={langueFilter} onValueChange={handleLangueChange}>
+            <SelectTrigger className="w-full rounded-xl border-or/20 md:w-45">
+              <SelectValue placeholder={t("filterLangue")} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">{t("filterAllLangues")}</SelectItem>
+              {uniqueLangues.map((langue) => (
+                <SelectItem key={langue} value={langue}>
+                  {langue}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        )}
+
+        {/* Réinitialiser */}
+        {hasActiveFilters && (
+          <button
+            type="button"
+            onClick={clearFilters}
+            className="inline-flex items-center gap-1.5 rounded-full border border-or/20 px-3 py-2 text-xs font-medium text-ebene/60 transition-colors hover:bg-or/5"
+          >
+            <X className="h-3.5 w-3.5" />
+            {t("filterClear")}
+          </button>
+        )}
+      </div>
+
+      {/* Compteur */}
+      {hasActiveFilters && (
+        <p className="px-1 text-xs text-ebene/50">
+          {t("resultsCount", {
+            filtered: filteredAdages.length,
+            total: adages.length,
+          })}
+        </p>
+      )}
+
+      {/* Liste des cartes */}
+      {filteredAdages.length === 0 ? (
+        <div className="rounded-2xl border border-dashed border-or/20 bg-surface p-8 text-center">
+          <Search className="mx-auto h-8 w-8 text-ebene/20" />
+          <p className="mt-3 text-sm text-ebene/50">{t("noFilterResults")}</p>
+          <button
+            type="button"
+            onClick={clearFilters}
+            className="mt-2 text-xs font-medium text-terre transition-colors hover:text-terre/70"
+          >
+            {t("filterClear")}
+          </button>
+        </div>
+      ) : (
+        <div className="space-y-3">
+          {paginatedAdages.map((adage) => (
+            <ModerationCard key={adage.id} adage={adage} />
+          ))}
+        </div>
+      )}
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
+      )}
     </div>
   );
 }

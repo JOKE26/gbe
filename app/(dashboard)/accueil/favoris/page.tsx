@@ -2,7 +2,7 @@ import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { prisma } from "@/lib/prisma";
-import { AdageCompactCard } from "@/components/features/adage/adage-compact-card";
+import { FilterableAdageList } from "@/components/features/adage/filterable-adage-list";
 import { PageHeader } from "@/components/shared/page-header";
 import { Heart } from "lucide-react";
 import Link from "next/link";
@@ -23,32 +23,32 @@ export default async function FavorisPage() {
     },
   });
 
+  const items = quotidiens.map((q) => ({
+    id: q.id,
+    quotidienId: q.id,
+    texteOriginal: q.adage.texteOriginal,
+    traductionLitterale: q.adage.traductionLitterale,
+    explication: q.adage.explication,
+    contexteUsage: q.adage.contexteUsage,
+    source: q.adage.source,
+    audioUrl: q.adage.audioUrl,
+    langueNom: q.adage.langue.nom,
+    langueCode: q.adage.langue.code,
+    favori: q.favori,
+    date: new Date(q.date).toLocaleDateString("fr-FR", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    }),
+  }));
+
   return (
     <div>
       <PageHeader title={t("title")} description={t("subtitle")} />
 
-      {quotidiens.length > 0 ? (
-        <div className="mx-auto max-w-3xl space-y-4">
-          {quotidiens.map((q) => (
-            <AdageCompactCard
-              key={q.id}
-              quotidienId={q.id}
-              texteOriginal={q.adage.texteOriginal}
-              traductionLitterale={q.adage.traductionLitterale}
-              explication={q.adage.explication}
-              contexteUsage={q.adage.contexteUsage}
-              source={q.adage.source}
-              audioUrl={q.adage.audioUrl}
-              langueNom={q.adage.langue.nom}
-              langueCode={q.adage.langue.code}
-              favori={q.favori}
-              date={new Date(q.date).toLocaleDateString("fr-FR", {
-                day: "numeric",
-                month: "long",
-                year: "numeric",
-              })}
-            />
-          ))}
+      {items.length > 0 ? (
+        <div className="mx-auto max-w-3xl">
+          <FilterableAdageList items={items} />
         </div>
       ) : (
         <div className="mx-auto max-w-md">

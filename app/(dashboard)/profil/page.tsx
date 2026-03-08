@@ -33,8 +33,12 @@ export default async function ProfilPage() {
 
   if (!user) redirect("/login");
 
-  // Charger toutes les langues pour le sélecteur de préférence (dédupliquées par nom)
+  // Charger uniquement les langues qui ont au moins 1 adage approuvé
+  // (pas de sens de proposer une langue sans contenu disponible)
   const langues = await prisma.langue.findMany({
+    where: {
+      adages: { some: { statut: "APPROVED" } },
+    },
     distinct: ["nom"],
     orderBy: { nom: "asc" },
     select: { id: true, nom: true },

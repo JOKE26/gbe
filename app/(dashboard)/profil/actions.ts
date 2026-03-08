@@ -63,7 +63,9 @@ export async function updateProfile(input: ProfileInput) {
   // Si la langue préférée a changé, rafraîchir l'adage du jour
   if (langueChanged) {
     await refreshDailyAdageForLangue(userId, newLangueId);
-    revalidatePath("/accueil");
+    // Invalider le cache de toutes les routes (layout scope) pour forcer un
+    // refetch côté client lors de la navigation vers /accueil
+    revalidatePath("/", "layout");
   }
 
   revalidatePath("/profil");

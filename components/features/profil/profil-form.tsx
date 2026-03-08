@@ -57,8 +57,10 @@ export function ProfilForm({ user, profile, langues }: ProfilFormProps) {
         setSuccess(true);
         if (result.langueChanged) {
           setSuccessMessage(t("adageRefreshed"));
-          // Invalidate Next.js client-side Router Cache so /accueil fetches fresh data
-          router.refresh();
+          // Naviguer vers /accueil pour que l'utilisateur voie immédiatement
+          // le nouvel adage dans sa nouvelle langue préférée
+          router.push("/accueil");
+          return;
         } else {
           setSuccessMessage(t("saveSuccess"));
         }
