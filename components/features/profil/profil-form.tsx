@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { updateProfile } from "@/app/(dashboard)/profil/actions";
 import { UserAvatar } from "@/components/shared/user-avatar";
@@ -27,6 +28,7 @@ interface ProfilFormProps {
 
 export function ProfilForm({ user, profile, langues }: ProfilFormProps) {
   const t = useTranslations("dashboard.profil");
+  const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [success, setSuccess] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -55,6 +57,8 @@ export function ProfilForm({ user, profile, langues }: ProfilFormProps) {
         setSuccess(true);
         if (result.langueChanged) {
           setSuccessMessage(t("adageRefreshed"));
+          // Invalidate Next.js client-side Router Cache so /accueil fetches fresh data
+          router.refresh();
         } else {
           setSuccessMessage(t("saveSuccess"));
         }
