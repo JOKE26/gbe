@@ -17,6 +17,8 @@
   },
   "nav": {
     "home": "Accueil",
+    "history": "Historique",
+    "favorites": "Favoris",
     "profile": "Profil",
     "contributions": "Contributions",
     "settings": "Paramètres",
@@ -103,8 +105,7 @@
     "cta": {
       "title": "Commencez votre rituel aujourd'hui",
       "subtitle": "Rejoignez des milliers de membres de la diaspora qui redécouvrent la richesse de leurs cultures chaque matin.",
-      "button": "S'inscrire gratuitement",
-      "secondary": "Découvrir les offres"
+      "button": "S'inscrire gratuitement"
     }
   },
   "auth": {
@@ -135,6 +136,20 @@
     }
   },
   "dashboard": {
+    "header": {
+      "greeting": "Bonjour, {name}",
+      "streak": "{count} jours consécutifs"
+    },
+    "rightPanel": {
+      "calendar": "Calendrier",
+      "quickStats": "Statistiques",
+      "totalProverbs": "Proverbes lus",
+      "activeLanguages": "Langues actives",
+      "totalFavoris": "Favoris",
+      "heritageTitle": "Votre Héritage",
+      "heritageDescription": "Chaque proverbe lu est un pas de plus vers la préservation de votre patrimoine linguistique.",
+      "heritageButton": "Explorer plus"
+    },
     "accueil": {
       "title": "Votre adage du jour",
       "greeting": "Bonjour",
@@ -143,6 +158,20 @@
       "goToProfile": "Configurer mon profil",
       "markAsRead": "Marquer comme lu",
       "alreadyRead": "Lu"
+    },
+    "historique": {
+      "title": "Historique",
+      "subtitle": "Retrouvez tous les proverbes que vous avez découverts.",
+      "empty": "Aucun proverbe dans votre historique.",
+      "emptyHint": "Lisez votre premier adage du jour pour commencer votre collection.",
+      "goToAccueil": "Voir l'adage du jour"
+    },
+    "favoris": {
+      "title": "Mes favoris",
+      "subtitle": "Les proverbes qui vous ont le plus marqué.",
+      "empty": "Aucun favori pour le moment.",
+      "emptyHint": "Appuyez sur le cœur d'un proverbe pour l'ajouter à vos favoris.",
+      "goToAccueil": "Voir l'adage du jour"
     },
     "profil": {
       "title": "Mon profil",
@@ -238,6 +267,9 @@
   },
   "adage": {
     "new": "Nouveau",
+    "dailyRitual": "Rituel du jour",
+    "showContext": "Voir le contexte",
+    "hideContext": "Masquer le contexte",
     "original": "Texte original",
     "translation": "Traduction littérale",
     "explanation": "Explication culturelle",
@@ -327,7 +359,8 @@
       "backHome": "Retour à l'accueil"
     },
     "unauthorized": "Vous devez être connecté pour accéder à cette page.",
-    "generic": "Une erreur inattendue est survenue. Veuillez réessayer."
+    "generic": "Une erreur inattendue est survenue. Veuillez réessayer.",
+    "retry": "Réessayer"
   },
   "email": {
     "contributionApproved": {

@@ -3,22 +3,37 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { signOut } from "next-auth/react";
 import { cn } from "@/lib/utils";
 import {
-  Home,
-  User,
   BookOpen,
+  User,
+  Languages,
+  Heart,
+  Clock,
   Settings,
   ShieldCheck,
   Scale,
+  LogOut,
+  X,
 } from "lucide-react";
 
 const NAV_ITEMS = [
-  { href: "/accueil", icon: Home, labelKey: "home" as const },
+  { href: "/accueil", icon: BookOpen, labelKey: "home" as const },
+  {
+    href: "/accueil/historique",
+    icon: Clock,
+    labelKey: "history" as const,
+  },
+  {
+    href: "/accueil/favoris",
+    icon: Heart,
+    labelKey: "favorites" as const,
+  },
   { href: "/profil", icon: User, labelKey: "profile" as const },
   {
     href: "/contributions",
-    icon: BookOpen,
+    icon: Languages,
     labelKey: "contributions" as const,
   },
   { href: "/parametres", icon: Settings, labelKey: "settings" as const },
@@ -31,56 +46,117 @@ const ADMIN_ITEMS = [
 
 interface SidebarProps {
   isAdmin?: boolean;
+  isOpen?: boolean;
+  onClose?: () => void;
+  user?: {
+    name?: string | null;
+    email: string;
+  };
 }
 
-export function Sidebar({ isAdmin = false }: SidebarProps) {
+export function Sidebar({
+  isAdmin = false,
+  isOpen = false,
+  onClose,
+  user,
+}: SidebarProps) {
   const pathname = usePathname();
   const t = useTranslations("nav");
 
+  const initials = user?.name
+    ? user.name
+        .split(" ")
+        .filter(Boolean)
+        .map((part) => part.charAt(0).toUpperCase())
+        .slice(0, 2)
+        .join("")
+    : (user?.email?.charAt(0).toUpperCase() ?? "?");
+  const displayName = user?.name ?? user?.email ?? "";
+
   return (
-    <aside className="hidden w-66 shrink-0 border-r border-or/10 bg-surface md:block">
-      <div className="flex h-full flex-col">
+    <>
+      {/* Overlay mobile */}
+      {isOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/20 lg:hidden"
+          onClick={onClose}
+        />
+      )}
+
+      <aside
+        className={cn(
+          "fixed left-0 top-0 z-50 flex h-screen w-64 flex-col border-r border-or/20 bg-surface transition-transform duration-300",
+          isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0",
+        )}
+      >
         {/* Logo */}
-        <div className="flex h-16 items-center px-6">
-          <Link
-            href="/accueil"
-            className="font-serif text-2xl font-bold text-ebene"
-          >
-            Gbé
-          </Link>
+        <div className="flex items-center justify-between p-8">
+          <div className="flex items-center gap-2">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-linear-to-br from-terre to-or font-serif text-sm font-bold italic text-white">
+              G
+            </div>
+            <Link
+              href="/accueil"
+              className="font-serif text-2xl font-bold tracking-tight text-ebene"
+            >
+              Gbé
+            </Link>
+          </div>
+          <button type="button" className="lg:hidden" onClick={onClose}>
+            <X className="h-5 w-5 text-ebene/60" />
+          </button>
         </div>
 
-        <div className="mx-6 h-px bg-or/10" />
-
         {/* Navigation */}
-        <nav className="flex-1 space-y-1 px-3 py-4">
+        <nav className="mt-4 flex-1 space-y-2 px-4">
           {[...NAV_ITEMS, ...(isAdmin ? ADMIN_ITEMS : [])].map((item) => {
-            const isActive = pathname.startsWith(item.href);
+            const isActive =
+              item.href === "/accueil"
+                ? pathname === "/accueil"
+                : pathname.startsWith(item.href);
             return (
               <Link
                 key={item.href}
                 href={item.href}
+                onClick={onClose}
                 className={cn(
-                  "flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-all",
+                  "flex w-full items-center gap-4 rounded-xl px-4 py-3 text-sm font-bold tracking-wide transition-all duration-300",
                   isActive
-                    ? "bg-terre/6 font-medium text-terre"
-                    : "text-ebene/60 hover:bg-terre/4 hover:text-ebene",
+                    ? "bg-sable text-terre"
+                    : "text-ebene/60 hover:bg-sable/50 hover:text-ebene",
                 )}
               >
-                <item.icon className="h-5 w-5" />
-                {t(item.labelKey)}
+                <item.icon
+                  className="h-5 w-5"
+                  strokeWidth={isActive ? 2.5 : 2}
+                />
+                <span className="uppercase tracking-widest">
+                  {t(item.labelKey)}
+                </span>
               </Link>
             );
           })}
         </nav>
 
-        {/* Footer sidebar */}
-        <div className="border-t border-or/10 px-6 py-4">
-          <p className="text-xs text-ebene/40">
-            © {new Date().getFullYear()} Gbé
-          </p>
+        {/* User footer — entire zone triggers logout */}
+        <div className="mt-auto border-t border-or/10 p-6">
+          <button
+            type="button"
+            onClick={() => signOut({ callbackUrl: "/" })}
+            className="group flex w-full cursor-pointer items-center gap-4 rounded-2xl p-2 transition-colors hover:bg-sable"
+          >
+            <div className="flex h-10 w-10 items-center justify-center rounded-full border border-terre/20 bg-terre/10 text-sm font-bold text-terre">
+              {initials}
+            </div>
+            <div className="min-w-0 flex-1 text-left">
+              <p className="truncate text-sm font-bold text-ebene">
+                {displayName}
+              </p>
+            </div>
+            <LogOut className="h-4 w-4 text-ebene/30 transition-colors group-hover:text-terre" />
+          </button>
         </div>
-      </div>
-    </aside>
+      </aside>
+    </>
   );
 }

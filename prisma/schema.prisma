@@ -190,6 +190,7 @@ model AdageQuotidien {
   adageId String
   date    DateTime @db.Date
   lu      Boolean  @default(false)
+  favori  Boolean  @default(false)
 
   user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
   adage Adage @relation(fields: [adageId], references: [id])

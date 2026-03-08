@@ -1,16 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { signOut } from "next-auth/react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { UserAvatar } from "@/components/shared/user-avatar";
-import { LogOut, User } from "lucide-react";
+import { Flame, Menu } from "lucide-react";
 
 interface HeaderProps {
   user: {
@@ -18,46 +9,59 @@ interface HeaderProps {
     email: string;
     image?: string | null;
   };
+  onMenuToggle?: () => void;
+  streak?: number;
 }
 
-export function Header({ user }: HeaderProps) {
-  const t = useTranslations("nav");
+function getSeasonLabel(): string {
+  const month = new Date().getMonth();
+  if (month >= 2 && month <= 4) return "Printemps";
+  if (month >= 5 && month <= 7) return "Été";
+  if (month >= 8 && month <= 10) return "Automne";
+  return "Hiver";
+}
+
+export function Header({ user, onMenuToggle, streak = 0 }: HeaderProps) {
+  const t = useTranslations("dashboard.header");
+
+  const today = new Date();
+  const dateStr = today.toLocaleDateString("fr-FR", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+  const season = getSeasonLabel();
+  const firstName = user.name?.split(" ")[0] ?? user.email.split("@")[0];
 
   return (
-    <header className="flex h-16 items-center justify-between border-b border-or/10 bg-surface px-4 md:px-8">
-      <div className="flex items-center gap-3">
-        {/* Mobile logo */}
-        <span className="font-serif text-xl font-bold text-ebene md:hidden">
-          Gbé
-        </span>
+    <header className="flex items-center justify-between px-6 py-8 md:px-10">
+      {/* Left: greeting */}
+      <div>
+        <div className="flex items-center gap-3">
+          <button type="button" className="lg:hidden" onClick={onMenuToggle}>
+            <Menu className="h-6 w-6 text-ebene" />
+          </button>
+          <h1 className="font-serif text-2xl font-bold text-ebene md:text-3xl">
+            {t("greeting", { name: firstName })}
+          </h1>
+        </div>
+        <p className="mt-1 text-xs font-bold uppercase tracking-[0.2em] text-terre">
+          {dateStr} · {season}
+        </p>
       </div>
 
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <button className="flex items-center gap-2 rounded-full p-1 transition-all hover:bg-terre/5">
-            <UserAvatar user={user} size="sm" />
-            <span className="hidden text-sm text-ebene md:inline">
-              {user.name ?? user.email}
+      {/* Right: streak + search */}
+      <div className="flex items-center gap-4">
+        {streak > 0 && (
+          <div className="hidden items-center gap-2 rounded-full border border-or/20 bg-surface px-4 py-2 md:flex">
+            <Flame className="h-4 w-4 text-terre" />
+            <span className="text-xs font-bold uppercase tracking-widest text-ebene">
+              {t("streak", { count: streak })}
             </span>
-          </button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-48">
-          <DropdownMenuItem asChild>
-            <a href="/profil" className="flex items-center gap-2">
-              <User className="h-4 w-4" />
-              {t("profile")}
-            </a>
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem
-            onClick={() => signOut({ callbackUrl: "/" })}
-            className="flex items-center gap-2 text-destructive"
-          >
-            <LogOut className="h-4 w-4" />
-            {t("logout")}
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+          </div>
+        )}
+      </div>
     </header>
   );
 }

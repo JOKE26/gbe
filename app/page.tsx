@@ -6,7 +6,6 @@ import {
   BookOpen,
   ChevronRight,
   MessageSquareQuote,
-  Heart,
   Languages,
 } from "lucide-react";
 
@@ -278,12 +277,6 @@ export default function LandingPage() {
                   className="w-full rounded-full bg-ebene px-10 py-5 text-xs font-bold uppercase tracking-[0.3em] text-white transition-all hover:bg-black sm:w-auto"
                 >
                   {t("cta.button")}
-                </Link>
-                <Link
-                  href="#how"
-                  className="w-full rounded-full border border-or px-10 py-5 text-xs font-bold uppercase tracking-[0.3em] text-ebene transition-all hover:bg-or/5 sm:w-auto"
-                >
-                  {t("cta.secondary")}
                 </Link>
               </div>
             </div>

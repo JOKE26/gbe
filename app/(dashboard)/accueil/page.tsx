@@ -2,7 +2,6 @@ import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { getOrCreateDailyAdage } from "@/lib/adage-quotidien";
-import { PageHeader } from "@/components/shared/page-header";
 import { AdageCard } from "@/components/features/adage/adage-card";
 import { BookOpen } from "lucide-react";
 import Link from "next/link";
@@ -15,16 +14,10 @@ export default async function AccueilPage() {
 
   const quotidien = await getOrCreateDailyAdage(session.user.id);
 
-  const greeting = session.user.name
-    ? `${t("greeting")}, ${session.user.name}`
-    : t("greeting");
-
   return (
     <div>
-      <PageHeader title={greeting} description={t("title")} />
-
       {quotidien ? (
-        <div className="mx-auto max-w-2xl">
+        <div className="mx-auto max-w-3xl">
           <AdageCard
             quotidienId={quotidien.id}
             texteOriginal={quotidien.adage.texteOriginal}
@@ -36,11 +29,12 @@ export default async function AccueilPage() {
             langueNom={quotidien.adage.langue.nom}
             langueCode={quotidien.adage.langue.code}
             lu={quotidien.lu}
+            favori={quotidien.favori}
           />
         </div>
       ) : (
         <div className="mx-auto max-w-md">
-          <div className="rounded-2xl border border-or/10 bg-surface p-8 text-center">
+          <div className="rounded-[2rem] border border-or/10 bg-surface p-10 text-center">
             <BookOpen className="mx-auto h-10 w-10 text-or/40" />
             <p className="mt-4 font-serif text-lg italic text-ebene/50">
               {t("noAdage")}
@@ -50,7 +44,7 @@ export default async function AccueilPage() {
             </p>
             <Link
               href="/profil"
-              className="mt-4 inline-block rounded-full border border-or/20 px-5 py-2 text-xs font-bold uppercase tracking-[0.2em] text-ebene transition-all hover:bg-or/5"
+              className="mt-6 inline-block rounded-full border border-or/20 px-6 py-3 text-xs font-bold uppercase tracking-[0.2em] text-ebene transition-all hover:bg-or/5"
             >
               {t("goToProfile")}
             </Link>
