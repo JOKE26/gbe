@@ -29,6 +29,7 @@ export function ProfilForm({ user, profile, langues }: ProfilFormProps) {
   const t = useTranslations("dashboard.profil");
   const [isPending, startTransition] = useTransition();
   const [success, setSuccess] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
   const [error, setError] = useState<string | null>(null);
 
   const [name, setName] = useState(user.name ?? "");
@@ -50,9 +51,14 @@ export function ProfilForm({ user, profile, langues }: ProfilFormProps) {
 
     startTransition(async () => {
       try {
-        await updateProfile(input);
+        const result = await updateProfile(input);
         setSuccess(true);
-        setTimeout(() => setSuccess(false), 3000);
+        if (result.langueChanged) {
+          setSuccessMessage(t("adageRefreshed"));
+        } else {
+          setSuccessMessage(t("saveSuccess"));
+        }
+        setTimeout(() => setSuccess(false), 5000);
       } catch (err) {
         const message =
           err instanceof Error ? err.message : "Une erreur est survenue";
@@ -146,7 +152,7 @@ export function ProfilForm({ user, profile, langues }: ProfilFormProps) {
       {success && (
         <div className="flex items-center gap-2 text-sm text-baobab">
           <Check className="h-4 w-4" />
-          {t("saveSuccess")}
+          {successMessage}
         </div>
       )}
 

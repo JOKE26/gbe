@@ -118,6 +118,7 @@
       "or": "ou",
       "noAccount": "Pas encore de compte ?",
       "signUp": "Créer un compte",
+      "invalidEmail": "Veuillez entrer une adresse email valide (ex: nom@domaine.com)",
       "checkEmail": "Vérifiez votre email",
       "checkEmailSubtitle": "Un lien de connexion a été envoyé. Vérifiez votre boîte de réception.",
       "retry": "Réessayer"
@@ -195,7 +196,8 @@
       "preferences": "Préférences",
       "dailyEmail": "Recevoir l'adage par email",
       "saveButton": "Enregistrer",
-      "saveSuccess": "Profil mis à jour avec succès"
+      "saveSuccess": "Profil mis à jour avec succès",
+      "adageRefreshed": "Profil mis à jour ! Votre adage du jour a été changé dans votre nouvelle langue préférée."
     },
     "contributions": {
       "title": "Contributions",

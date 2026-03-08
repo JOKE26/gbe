@@ -5,9 +5,16 @@ import { signIn } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 
+const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+function isValidEmail(value: string): boolean {
+  return EMAIL_REGEX.test(value.trim());
+}
+
 export function LoginForm() {
   const t = useTranslations("auth.login");
   const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
   const [isLoadingGoogle, setIsLoadingGoogle] = useState(false);
   const [isLoadingEmail, setIsLoadingEmail] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
@@ -17,9 +24,19 @@ export function LoginForm() {
     signIn("google", { callbackUrl: "/accueil" });
   }
 
+  function handleEmailChange(value: string) {
+    setEmail(value);
+    if (emailError) setEmailError("");
+  }
+
   async function handleMagicLink(e: React.FormEvent) {
     e.preventDefault();
     if (!email.trim()) return;
+
+    if (!isValidEmail(email)) {
+      setEmailError(t("invalidEmail"));
+      return;
+    }
 
     setIsLoadingEmail(true);
     await signIn("resend", {
@@ -107,14 +124,31 @@ export function LoginForm() {
 
       {/* Magic Link */}
       <form onSubmit={handleMagicLink} className="space-y-3">
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder={t("emailPlaceholder")}
-          required
-          className="w-full rounded-full border border-or/20 bg-sable px-6 py-3 text-sm text-ebene placeholder:text-ebene/30 focus:border-terre/40 focus:outline-none focus:ring-1 focus:ring-terre/20"
-        />
+        <div>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => handleEmailChange(e.target.value)}
+            placeholder={t("emailPlaceholder")}
+            required
+            aria-invalid={!!emailError}
+            aria-describedby={emailError ? "email-error" : undefined}
+            className={`w-full rounded-full border bg-sable px-6 py-3 text-sm text-ebene placeholder:text-ebene/30 focus:outline-none focus:ring-1 transition-colors ${
+              emailError
+                ? "border-red-400 focus:border-red-400 focus:ring-red-200"
+                : "border-or/20 focus:border-terre/40 focus:ring-terre/20"
+            }`}
+          />
+          {emailError && (
+            <p
+              id="email-error"
+              className="mt-1.5 pl-4 text-xs text-red-500"
+              role="alert"
+            >
+              {emailError}
+            </p>
+          )}
+        </div>
         <button
           type="submit"
           disabled={isLoadingEmail || !email.trim()}

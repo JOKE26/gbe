@@ -4,6 +4,7 @@ import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { profileSchema, origineSchema } from "@/lib/validators";
 import { revalidatePath } from "next/cache";
+import { refreshDailyAdageForLangue } from "@/lib/adage-quotidien";
 import type { ProfileInput, OrigineInput } from "@/lib/validators";
 
 async function getAuthenticatedUserId(): Promise<string> {
@@ -30,6 +31,15 @@ export async function updateProfile(input: ProfileInput) {
   const userId = await getAuthenticatedUserId();
   const data = profileSchema.parse(input);
 
+  // Récupérer l'ancienne langue préférée pour détecter un changement
+  const oldProfile = await prisma.profile.findUnique({
+    where: { userId },
+    select: { preferredLangueId: true },
+  });
+  const oldLangueId = oldProfile?.preferredLangueId ?? null;
+  const newLangueId = data.preferredLangueId ?? null;
+  const langueChanged = oldLangueId !== newLangueId;
+
   // Mettre à jour le nom sur User
   await prisma.user.update({
     where: { id: userId },
@@ -42,16 +52,22 @@ export async function updateProfile(input: ProfileInput) {
     create: {
       userId,
       bio: data.bio ?? null,
-      preferredLangueId: data.preferredLangueId ?? null,
+      preferredLangueId: newLangueId,
     },
     update: {
       bio: data.bio ?? null,
-      preferredLangueId: data.preferredLangueId ?? null,
+      preferredLangueId: newLangueId,
     },
   });
 
+  // Si la langue préférée a changé, rafraîchir l'adage du jour
+  if (langueChanged) {
+    await refreshDailyAdageForLangue(userId, newLangueId);
+    revalidatePath("/accueil");
+  }
+
   revalidatePath("/profil");
-  return { success: true };
+  return { success: true, langueChanged };
 }
 
 export async function addOrigine(input: OrigineInput) {
