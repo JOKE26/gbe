@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 
 const NAV_LINKS = [
@@ -21,8 +22,15 @@ export function LandingNav() {
     <nav className="sticky top-0 z-50 border-b border-or/20 bg-sable/80 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
         {/* Logo */}
-        <Link href="/" className="font-serif text-2xl font-bold text-ebene">
-          Gbé
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/logo-gbe.png"
+            alt="Gbé"
+            width={380}
+            height={64}
+            className="h-35 w-auto"
+            priority
+          />
         </Link>
 
         {/* Desktop links */}

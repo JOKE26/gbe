@@ -35,7 +35,7 @@ export function Header({ user, onMenuToggle, streak = 0 }: HeaderProps) {
   const firstName = user.name?.split(" ")[0] ?? user.email.split("@")[0];
 
   return (
-    <header className="flex items-center justify-between px-6 py-8 md:px-10">
+    <header className="mx-4 mb-6 mt-4 flex items-center justify-between rounded-2xl border border-or/10 bg-surface px-6 py-6 shadow-sm md:mx-6 md:px-10">
       {/* Left: greeting */}
       <div>
         <div className="flex items-center gap-3">

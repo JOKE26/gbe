@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { signOut } from "next-auth/react";
@@ -90,25 +91,24 @@ export function Sidebar({
         )}
       >
         {/* Logo */}
-        <div className="flex items-center justify-between p-8">
-          <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-linear-to-br from-terre to-or font-serif text-sm font-bold italic text-white">
-              G
-            </div>
-            <Link
-              href="/accueil"
-              className="font-serif text-2xl font-bold tracking-tight text-ebene"
-            >
-              Gbé
-            </Link>
-          </div>
+        <div className="flex items-center justify-between px-6 py-4">
+          <Link href="/accueil" className="flex items-center gap-2">
+            <Image
+              src="/logo-gbe.png"
+              alt="Gbé"
+              width={380}
+              height={64}
+              className="h-35 w-auto"
+              priority
+            />
+          </Link>
           <button type="button" className="lg:hidden" onClick={onClose}>
             <X className="h-5 w-5 text-ebene/60" />
           </button>
         </div>
 
         {/* Navigation */}
-        <nav className="mt-4 flex-1 space-y-2 px-4">
+        <nav className="mt-1 flex-1 space-y-2 px-4">
           {[...NAV_ITEMS, ...(isAdmin ? ADMIN_ITEMS : [])].map((item) => {
             const isActive =
               item.href === "/accueil"

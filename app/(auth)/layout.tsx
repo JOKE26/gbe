@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 export default function AuthLayout({
@@ -8,9 +9,16 @@ export default function AuthLayout({
   return (
     <div className="flex min-h-screen items-center justify-center bg-sable p-4">
       <div className="w-full max-w-md">
-        <div className="mb-8 text-center">
-          <h1 className="font-serif text-3xl font-bold text-ebene">Gbé</h1>
-          <div className="mx-auto mt-2 h-px w-12 bg-or" />
+        <div className="mb-8 flex flex-col items-center">
+          <Image
+            src="/logo-gbe.png"
+            alt="Gbé"
+            width={400}
+            height={64}
+            className="h-35 w-auto"
+            priority
+          />
+          <div className="mt-3 h-px w-12 bg-or" />
         </div>
         {children}
       </div>
