@@ -24,50 +24,45 @@ export default async function DashboardLayout({
   let currentStreak = 0;
 
   try {
-    [totalProverbs, activeLanguages, totalFavoris, currentStreak] =
-      await Promise.all([
-        prisma.adageQuotidien.count({
-          where: { userId: session.user.id, lu: true },
-        }),
-        prisma.userOrigine
-          .findMany({
-            where: {
-              profile: { userId: session.user.id },
-              langueId: { not: null },
-            },
-            select: { langueId: true },
-            distinct: ["langueId"],
-          })
-          .then((r) => r.length),
-        prisma.adageQuotidien.count({
-          where: { userId: session.user.id, favori: true },
-        }),
-        // Simplified streak: count consecutive days with read adages ending today
-        prisma.adageQuotidien
-          .findMany({
-            where: { userId: session.user.id, lu: true },
-            orderBy: { date: "desc" },
-            select: { date: true },
-            take: 60,
-          })
-          .then((rows) => {
-            let streak = 0;
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-            for (let i = 0; i < rows.length; i++) {
-              const expected = new Date(today);
-              expected.setDate(expected.getDate() - i);
-              const rowDate = new Date(rows[i].date);
-              rowDate.setHours(0, 0, 0, 0);
-              if (rowDate.getTime() === expected.getTime()) {
-                streak++;
-              } else {
-                break;
-              }
-            }
-            return streak;
-          }),
-      ]);
+    // Sequential queries to avoid exhausting Supabase connection pool
+    totalProverbs = await prisma.adageQuotidien.count({
+      where: { userId: session.user.id, lu: true },
+    });
+
+    const langueResults = await prisma.userOrigine.findMany({
+      where: {
+        profile: { userId: session.user.id },
+        langueId: { not: null },
+      },
+      select: { langueId: true },
+      distinct: ["langueId"],
+    });
+    activeLanguages = langueResults.length;
+
+    totalFavoris = await prisma.adageQuotidien.count({
+      where: { userId: session.user.id, favori: true },
+    });
+
+    // Simplified streak: count consecutive days with read adages ending today
+    const streakRows = await prisma.adageQuotidien.findMany({
+      where: { userId: session.user.id, lu: true },
+      orderBy: { date: "desc" },
+      select: { date: true },
+      take: 60,
+    });
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    for (let i = 0; i < streakRows.length; i++) {
+      const expected = new Date(today);
+      expected.setDate(expected.getDate() - i);
+      const rowDate = new Date(streakRows[i].date);
+      rowDate.setHours(0, 0, 0, 0);
+      if (rowDate.getTime() === expected.getTime()) {
+        currentStreak++;
+      } else {
+        break;
+      }
+    }
   } catch (error) {
     console.error("[DashboardLayout] Failed to fetch stats:", error);
   }
