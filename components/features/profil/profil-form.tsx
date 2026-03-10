@@ -162,11 +162,16 @@ export function ProfilForm({ user, profile, langues }: ProfilFormProps) {
         </div>
       )}
 
+      {/* Hint validation */}
+      {!name.trim() && (
+        <p className="text-xs text-terre">{t("nameRequired")}</p>
+      )}
+
       {/* Bouton soumettre */}
       <button
         type="submit"
         disabled={isPending || !name.trim()}
-        className="flex items-center gap-2 rounded-full bg-terre px-6 py-3 text-xs font-bold uppercase tracking-[0.2em] text-white transition-all hover:bg-terre/90 disabled:opacity-50"
+        className="flex items-center gap-2 rounded-full bg-terre px-6 py-3 text-xs font-bold uppercase tracking-[0.2em] text-white transition-all hover:bg-terre/90 disabled:cursor-not-allowed disabled:opacity-50"
       >
         {isPending && <Loader2 className="h-3.5 w-3.5 animate-spin" />}
         {t("saveButton")}

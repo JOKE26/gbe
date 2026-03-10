@@ -17,6 +17,13 @@ export default async function DashboardLayout({
   const isAdmin =
     session.user.role === "ADMIN" || session.user.role === "MODERATOR";
 
+  // Check if user has completed onboarding
+  const user = await prisma.user.findUnique({
+    where: { id: session.user.id },
+    select: { onboardingCompleted: true },
+  });
+  const showOnboarding = !user?.onboardingCompleted;
+
   // Fetch quick stats for the right panel (with fallback if DB unavailable)
   let totalProverbs = 0;
   let activeLanguages = 0;
@@ -72,6 +79,7 @@ export default async function DashboardLayout({
       isAdmin={isAdmin}
       user={session.user}
       stats={{ totalProverbs, activeLanguages, totalFavoris, currentStreak }}
+      showOnboarding={showOnboarding}
     >
       {children}
     </DashboardShell>

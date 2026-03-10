@@ -199,6 +199,7 @@
       "preferences": "Préférences",
       "dailyEmail": "Recevoir l'adage par email",
       "saveButton": "Enregistrer",
+      "nameRequired": "Veuillez renseigner votre nom complet pour pouvoir enregistrer votre profil.",
       "saveSuccess": "Profil mis à jour avec succès",
       "adageRefreshed": "Profil mis à jour ! Votre adage du jour a été changé dans votre nouvelle langue préférée."
     },
@@ -395,6 +396,35 @@
       "body": "Après vérification, votre contribution n'a malheureusement pas pu être retenue. N'hésitez pas à soumettre un nouvel adage !",
       "cta": "Soumettre un nouvel adage"
     }
+  },
+  "onboarding": {
+    "welcome": {
+      "title": "Bienvenue sur Gbé !",
+      "description": "Découvrez chaque jour un proverbe ancestral dans votre langue d'origine. Voici comment bien démarrer.",
+      "step1": "Complétez votre profil",
+      "step1Desc": "Ajoutez votre nom et choisissez votre langue d'adage préférée.",
+      "step2": "Renseignez vos origines",
+      "step2Desc": "Pays, ethnie, langue — pour personnaliser votre expérience.",
+      "step3": "Gérez vos emails",
+      "step3Desc": "Un adage vous est envoyé chaque matin par email. Vous pouvez le désactiver."
+    },
+    "profile": {
+      "title": "Votre profil",
+      "description": "Quelques informations essentielles pour personnaliser votre rituel quotidien.",
+      "nameHint": "Renseignez votre nom complet pour que nous puissions vous accueillir chaque matin.",
+      "langueHint": "Choisissez la langue dans laquelle vous souhaitez recevoir vos proverbes (Fon, Yoruba, Bambara…).",
+      "originesHint": "Ajoutez vos origines (pays, ethnie, langue) pour enrichir votre expérience culturelle."
+    },
+    "email": {
+      "title": "Emails quotidiens",
+      "description": "Par défaut, vous recevez un proverbe chaque matin à 8h dans votre boîte mail.",
+      "info": "L'email quotidien contient votre adage du jour avec sa traduction et son explication culturelle.",
+      "tip": "Vous pouvez désactiver cette option à tout moment dans vos Paramètres."
+    },
+    "next": "Suivant",
+    "prev": "Retour",
+    "goToProfile": "Compléter mon profil",
+    "skip": "Plus tard"
   },
   "footer": {
     "tagline": "Le trait d'union entre l'héritage ancestral et la vie moderne.",

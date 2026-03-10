@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Sidebar } from "@/components/shared/sidebar";
 import { Header } from "@/components/shared/header";
 import { RightPanel } from "@/components/features/dashboard/right-panel";
+import { OnboardingDialog } from "@/components/features/onboarding/onboarding-dialog";
 
 interface DashboardShellProps {
   children: React.ReactNode;
@@ -19,6 +20,7 @@ interface DashboardShellProps {
     totalFavoris: number;
     currentStreak: number;
   };
+  showOnboarding?: boolean;
 }
 
 export function DashboardShell({
@@ -26,11 +28,13 @@ export function DashboardShell({
   isAdmin,
   user,
   stats,
+  showOnboarding,
 }: DashboardShellProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-sable">
+      {showOnboarding && <OnboardingDialog />}
       {/* Sidebar — fixed left */}
       <Sidebar
         isAdmin={isAdmin}
