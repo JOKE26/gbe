@@ -33,6 +33,7 @@ const PAYS_DATA = [
   { nom: "Éthiopie", code: "ET" },
   { nom: "Kenya", code: "KE" },
   { nom: "Tanzanie", code: "TZ" },
+  { nom: "Gabon", code: "GA" },
 ] as const;
 
 /* ── Ethnies & Langues (par pays) ─────────────────────────────────────── */
@@ -219,6 +220,68 @@ const ETHNIES_LANGUES: Record<string, EthnieLangue[]> = {
       ethnie: "Soussou",
       langue: "Soussou",
       codeLangue: "sus",
+      famille: "Niger-Congo",
+    },
+  ],
+  Gabon: [
+    {
+      ethnie: "Fang",
+      langue: "Fang",
+      codeLangue: "fan",
+      famille: "Niger-Congo",
+    },
+    {
+      ethnie: "Nzebi",
+      langue: "Nzebi",
+      codeLangue: "nzb",
+      famille: "Niger-Congo",
+    },
+    {
+      ethnie: "Aduma",
+      langue: "Aduma",
+      codeLangue: "dma",
+      famille: "Niger-Congo",
+    },
+    {
+      ethnie: "Punu",
+      langue: "Punu",
+      codeLangue: "puu",
+      famille: "Niger-Congo",
+    },
+    {
+      ethnie: "Téké",
+      langue: "Téké",
+      codeLangue: "teg",
+      famille: "Niger-Congo",
+    },
+    {
+      ethnie: "Myènè",
+      langue: "Myènè",
+      codeLangue: "mye",
+      famille: "Niger-Congo",
+    },
+    {
+      ethnie: "Obamba",
+      langue: "Obamba",
+      codeLangue: "mdm",
+      famille: "Niger-Congo",
+    },
+    {
+      ethnie: "Vili",
+      langue: "Vili",
+      codeLangue: "vif",
+      famille: "Niger-Congo",
+    },
+    {
+      ethnie: "Kota",
+      langue: "Kota",
+      codeLangue: "koq",
+      famille: "Niger-Congo",
+    },
+    {
+      ethnie: "Eshira",
+      langue: "Eshira",
+      codeLangue: "shi",
       famille: "Niger-Congo",
     },
   ],
